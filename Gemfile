@@ -13,7 +13,7 @@ gem "seed-fu"
 
 # OmniAuth-based authentication
 gem "devise"
-gem "omniauth"
+gem "omniauth-cas"
 
 # Form layout and display
 gem "simple_form"

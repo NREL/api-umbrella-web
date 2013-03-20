@@ -210,7 +210,13 @@ Devise.setup do |config|
   if Rails.env.development?
     config.omniauth :developer
   else
-    raise "OmniAuth must be configured to use a real authentication mechanism for non-development use. See the available strategies: https://github.com/intridea/omniauth/wiki/List-of-Strategies"
+    config.omniauth :cas,
+      :host => "login.max.gov",
+      :login_url => "/cas/login",
+      :service_validate_url => "/cas/serviceValidate",
+      :logout_url => "/cas/logout",
+      :ssl => true,
+      :disable_ssl_verification => true
   end
 
   # ==> Warden configuration
