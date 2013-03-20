@@ -15,7 +15,6 @@
 /config/deployed.yml
 
 # Ignore files generated from templates
-/config/mongoid.yml
 /config/nginx/site.conf
 
 # Ignore log directory
