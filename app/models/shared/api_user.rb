@@ -6,7 +6,6 @@ class ApiUser
   field :first_name
   field :last_name
   field :email
-  field :website
   field :use_description
   field :unthrottled, :type => Boolean
   field :throttle_hourly_limit, :type => Integer
@@ -37,13 +36,6 @@ class ApiUser
     :with => /.+@.+\..+/,
     :allow_blank => true,
     :message => "Provide a valid email address."
-  validates_presence_of :website,
-    :message => "Provide your website URL.",
-    :unless => lambda { |user| user.no_domain_signup }
-  validates_format_of :website,
-    :with => /\w+\.\w+/,
-    :unless => lambda { |user| user.no_domain_signup },
-    :message => "Your website must be a valid URL in the form of http://data.gov"
   validates_acceptance_of :terms_and_conditions,
     :message => "Check the box to agree to the terms and conditions."
 
@@ -53,7 +45,7 @@ class ApiUser
   attr_accessor :terms_and_conditions, :no_domain_signup
 
   # Protect against mass-assignment.
-  attr_accessible :first_name, :last_name, :email, :website, :use_description,
+  attr_accessible :first_name, :last_name, :email, :use_description,
     :terms_and_conditions
 
   # has_role? simply needs to return true or false whether a user has a role or not.  
@@ -72,8 +64,6 @@ class ApiUser
       "Email"
     when :terms_and_conditions
       "Terms and conditions"
-    when :website
-      "Web site"
     else
       super
     end
