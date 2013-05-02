@@ -1,6 +1,6 @@
 GIT
   remote: http://github.com/NREL/capistrano_nrel_ext.git
-  revision: 9bbe0f209299f9b82b7ce0c6b29814ece620859e
+  revision: 8f60b403b91f21d66e51e571d94a09da49beedd0
   specs:
     capistrano_nrel_ext (0.3.0)
       artii
@@ -86,9 +86,9 @@ GEM
     chronic (0.9.1)
     chunky_png (1.2.8)
     client_side_validations (3.2.5)
-    client_side_validations-simple_form (2.0.1)
-      client_side_validations (~> 3.2.0)
-      simple_form (~> 2.0.3)
+    client_side_validations-simple_form (2.1.0)
+      client_side_validations (~> 3.2.5)
+      simple_form (~> 2.1.0)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -236,7 +236,7 @@ GEM
     seed-fu (2.2.0)
       activerecord (~> 3.1)
       activesupport (~> 3.1)
-    simple_form (2.0.4)
+    simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     sprockets (2.2.2)
