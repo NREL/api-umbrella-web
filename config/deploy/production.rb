@@ -1,12 +1,12 @@
 # Set the servers for this stage.
-role :app, "web1-api.hopto.org"
-role :web, "web1-api.hopto.org"
+role :app, "api-web1.anydns.com", "api-web2.anydns.com"
+role :web, "api-web1.anydns.com", "api-web2.anydns.com"
 
 # Set the base path for deployment.
-set :deploy_to_base, "/srv/data/devprod-int"
+set :deploy_to_base, "/srv"
 
 # Set the accessible web domain for this site.
-set :base_domain, "api.data.gov"
+set :base_domain, "api.anydns.com"
 
 # Production-ready deployments should exclude git data.
 set :copy_exclude, [".git"]
