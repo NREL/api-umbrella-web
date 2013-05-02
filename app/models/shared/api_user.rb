@@ -42,7 +42,7 @@ class ApiUser
   # Callbacks
   before_validation :generate_api_key, :on => :create
 
-  attr_accessor :terms_and_conditions, :no_domain_signup
+  attr_accessor :terms_and_conditions
 
   # Protect against mass-assignment.
   attr_accessible :first_name, :last_name, :email, :use_description,

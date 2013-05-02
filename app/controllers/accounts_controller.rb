@@ -6,8 +6,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @user = ApiUser.find_or_initialize_by(:email => params[:api_user][:email], :website => params[:api_user][:website])
-    @user.attributes = params[:api_user]
+    @user = ApiUser.new(params[:api_user])
 
     # Safe safely to be absolutely positive the save succeeded.
     if @user.with(:safe => true).save
