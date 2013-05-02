@@ -2,6 +2,9 @@ source :rubygems
 
 gem "rails", "~> 3.2.6"
 
+# Rails app server
+gem "torquebox", :platforms => [:jruby]
+
 # MongoDB
 gem "mongoid", ">= 3.0.0"
 
@@ -34,7 +37,9 @@ gem "client_side_validations-simple_form", ">= 2.0.0"
 
 gem "nokogiri"
 gem "babosa"
-gem "albino"
+
+# For running the python pygmentize program
+gem "childprocess"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -50,18 +55,28 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
+  # For JRuby, use the Node.js execjs runtime - We'll assume it's on the
+  # servers so it gets picked up by execjs. It's faster than therubyrhino.
 
   # JavaScript compression
   gem 'uglifier'
 
   # CSS compression
-  gem "yui-compressor"
+  # This Github fork has JRuby compatibility.
+  gem "yui-compressor", :git => "https://github.com/kares/ruby-yui-compressor.git"
 
   # Smarter handling of compiled CSS with relative paths (like Jammit)
   gem "sprockets-urlrewriter"
 
+  # Faster asset precompilation and caching.
+  #
+  # This fork allows cleaning expired assets at the same time as precompiling,
+  # so two rake tasks aren't necessary during our cap deploys. This saves
+  # significant time under JRuby. Hopefully it'll be merged into the main gem.
+  gem "turbo-sprockets-rails3", :git => "https://github.com/GUI/turbo-sprockets-rails3.git"
+
   # Improve PNG speed for image sprite generation
-  gem "oily_png"
+  gem "oily_png", :platforms => [:ruby]
 end
 
 # Bundle gems for the local environment. Make sure to
@@ -84,7 +99,10 @@ group :development do
   gem "capistrano-ext"
   gem "capistrano_nrel_ext", :git => "http://github.com/NREL/capistrano_nrel_ext.git"
 
-  gem "yajl-ruby", :require => false
+  gem "torquebox-server", :platforms => [:jruby]
+
+  gem "yajl-ruby", :require => false, :platforms => [:ruby]
+  gem "oj", :require => false, :platforms => [:ruby]
 
   gem "awesome_print"
 
