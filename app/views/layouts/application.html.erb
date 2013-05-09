@@ -7,6 +7,9 @@
     <meta content="width=1015,maximum-scale=1.0" name="viewport">
 
     <%= stylesheet_link_tag "application" %>
+    <!--[if IE]>
+      <%= stylesheet_link_tag "ie" %>
+    <![endif]-->
 
     <!--[if lt IE 9]>
       <%= javascript_include_tag "ie_lt_9" %>
@@ -17,9 +20,16 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
+
     <%= render("layouts/preheader") %>
 
     <div class="container-fluid">
+    <div class="corner-ribbon-wrapper right">
+      <div class="corner-ribbon">
+        <span>BETA</span>
+      </div>
+    </div>
+
       <div id="main" class="row-fluid">
         <%= render("layouts/header") %>
         <%= render("layouts/navigation") %>
