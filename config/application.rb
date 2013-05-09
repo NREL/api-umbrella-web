@@ -74,6 +74,7 @@ module Developer
       admin.css
       admin.js
       ckeditor.css
+      ie.css
       ie_lt_9.js
     )
 
