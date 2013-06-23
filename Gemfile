@@ -53,6 +53,9 @@ gem "rabl"
 # Country and state name lookups
 gem "countries"
 
+# Custom YAML config files
+gem "settingslogic"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -89,6 +92,9 @@ group :assets do
 
   # Improve PNG speed for image sprite generation
   gem "oily_png", :platforms => [:ruby]
+
+  # For JavaScript templates
+  gem "handlebars_assets"
 end
 
 # Bundle gems for the local environment. Make sure to
@@ -120,6 +126,4 @@ group :development do
 
   gem "yard", :require => false
   gem "kramdown", :require => false
-  gem "addressable"
-  gem "useragent"
 end
