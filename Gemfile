@@ -5,6 +5,9 @@ gem "rails", "~> 3.2.6"
 # Rails app server
 gem "torquebox", :platforms => [:jruby]
 
+# Abort requests that take too long
+gem "rack-timeout"
+
 # MongoDB
 gem "mongoid", ">= 3.0.0"
 
@@ -13,6 +16,9 @@ gem "mongoid-tree", :require => "mongoid/tree"
 
 # Database seeding
 gem "seed-fu"
+
+# Elasticsearch
+gem "stretcher"
 
 # OmniAuth-based authentication
 gem "devise"
@@ -40,6 +46,12 @@ gem "babosa"
 
 # For running the python pygmentize program
 gem "childprocess"
+
+# Views/templates for APIs
+gem "rabl"
+
+# Country and state name lookups
+gem "countries"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -108,4 +120,6 @@ group :development do
 
   gem "yard", :require => false
   gem "kramdown", :require => false
+  gem "addressable"
+  gem "useragent"
 end

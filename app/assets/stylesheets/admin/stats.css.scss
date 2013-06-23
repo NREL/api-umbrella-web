@@ -1,0 +1,81 @@
+.toggle-facet-table {
+  font-size: 11px;
+}
+
+.facet-table {
+  font-size: 11px;
+
+  th,
+  td {
+    padding: 2px;
+    line-height: 14px;
+  }
+
+  th.value,
+  td.value {
+    text-align: right;
+  }
+}
+
+#map_container {
+  width: 640px;
+  margin: 0px auto 20px auto;
+}
+
+.advanced-filter {
+  .input-append {
+    margin-bottom: 0px;
+  }
+
+  input {
+    font-size: 12px;
+    padding: 2px 3px;
+    min-height: 20px;
+  }
+
+  .help-block {
+    font-size: 85%;
+    line-height: 110%;
+    margin-top: 2px;
+  }
+}
+
+.filter-times {
+  text-align: right;
+
+  #interval_buttons {
+    display: inline-block;
+    margin: 4px 30px 0px 0px;
+  }
+
+  #reportrange {
+    display: inline-block;
+  }
+}
+
+.number-highlights {
+  margin: 20px 0px;
+}
+
+.number-highlight {
+  text-align: center;
+
+  strong {
+    font-size: 54px;
+    line-height: 100%;
+    font-weight: 100;
+    display: block;
+
+    .units {
+      font-size: 28px;
+      line-height: 100%;
+    }
+  }
+
+  small {
+    font-weight: bold;
+    font-size: 14px;
+  }
+}
+
+
