@@ -1,2 +1,5 @@
 development:
   server: "http://localhost:9200"
+
+production:
+  server: "http://ip-10-112-65-20.ec2.internal:9200"
