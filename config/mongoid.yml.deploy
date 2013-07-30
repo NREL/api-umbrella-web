@@ -10,7 +10,7 @@ development:
   <<: *defaults
   sessions:
     default:
-      database: api_umbrella_staging
+      database: api_umbrella_development
       hosts:
         - localhost:27017
 
@@ -33,7 +33,8 @@ staging:
     default:
       database: api_umbrella_staging
       hosts:
-        - localhost:27017
+        - ip-10-144-147-253.ec2.internal:27017
+        - ip-10-29-9-49.ec2.internal:27017
 
 production:
   <<: *defaults

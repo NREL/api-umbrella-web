@@ -1,26 +1,18 @@
-# Force a branched deployment on the staging server for the GSA demo.
-ENV["BRANCH"] = "gsa"
-require "capistrano_nrel_ext/recipes/branches"
-
 # Set the servers for this stage.
-role :app, "devstage-int.nrel.gov"
-role :web, "devstage-int.nrel.gov"
-
-# Define the primary db server as our app server so database migrations can run
-# from the code checkout there.
-role :db, "devstage-int.nrel.gov", :primary => true
-
-# On our real database server, don't actually perform a code deployment.
-role :db, "devstage-int-db.nrel.gov", :no_release => true
+role :app, "ec2-54-221-8-120.compute-1.amazonaws.com", "ec2-54-211-52-53.compute-1.amazonaws.com"
+role :web, "ec2-54-221-8-120.compute-1.amazonaws.com", "ec2-54-211-52-53.compute-1.amazonaws.com"
 
 # Set the base path for deployment.
-set :deploy_to_base, "/srv/developer/devstage-int"
+set :deploy_to_base, "/srv"
 
 # Set the accessible web domain for this site.
-set :base_domain, "stage.api.data.gov"
+set :base_domain, "api.data.gov"
 
 # Production-ready deployments should exclude git data.
 set :copy_exclude, [".git"]
 
 # Set the Rails environment.
 set :rails_env, "staging"
+
+set :user, "root"
+ssh_options[:keys] = ["/vagrant/workspace/aws_nmuerdter.pem"]
