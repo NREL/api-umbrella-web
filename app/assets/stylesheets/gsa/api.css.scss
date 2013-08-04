@@ -10,7 +10,7 @@
 
 header {
 	height:60px;
-  background-image:url('/assets/gsa/header-bg.jpg');
+  background-image:url('/images/gsa/header-bg.jpg');
   background-repeat:no-repeat;
   background-position:center top;
 }
@@ -82,6 +82,51 @@ div#content {
 
 div#footer div#footer-menu ul.menu {
   font-size: pxtoem(12px);
+}
+
+hr {
+  margin: 18px 0px;
+}
+
+.home-callout {
+  text-align: center;
+  font-size: pxtoem(16px);
+  padding: 0px;
+  margin: 20px 0px 35px 0px;
+}
+
+.home-about {
+  text-align: center;
+  margin: 18px 0px;
+}
+
+.btn {
+  color: #333 !important;
+  text-decoration: none !important;
+}
+
+.btn-primary, .btn-info {
+  color: #fff !important;
+}
+
+.about-page {
+  p, li {
+    font-size: pxtoem(15px);
+  }
+
+  p {
+    padding: 0px;
+    margin: 15px 0px;
+  }
+
+  h2 {
+    border-bottom: 1px solid #eee;
+    margin: 18px 0px 10px 0px;
+  }
+
+  h3 {
+    margin: 16px 0px 8px 0px;
+  }
 }
 
 @import "gsa/corner_ribbon";
