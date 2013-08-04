@@ -1,3 +1,5 @@
+require "dotenv/capistrano"
+
 # Set the servers for this stage.
 role :app, "ec2-54-221-8-120.compute-1.amazonaws.com", "ec2-54-211-52-53.compute-1.amazonaws.com"
 role :web, "ec2-54-221-8-120.compute-1.amazonaws.com", "ec2-54-211-52-53.compute-1.amazonaws.com"
