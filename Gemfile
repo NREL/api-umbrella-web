@@ -1,7 +1,6 @@
 source :rubygems
-source "http://torquebox.org/rubygems"
 
-gem "rails", "~> 3.2.6"
+gem "rails", "~> 3.2.14"
 
 # Environment specific configuration
 gem "dotenv-rails"
@@ -13,19 +12,25 @@ gem "torquebox", "~> 2.3.2", :platforms => [:jruby]
 gem "rack-timeout"
 
 # MongoDB
-gem "mongoid", ">= 3.0.0"
+gem "mongoid", "~> 3.1.4"
 
 # Structure trees of mongoid documents
-gem "mongoid-tree", :require => "mongoid/tree"
+gem "mongoid-tree", "~> 1.0.3", :require => "mongoid/tree"
+
+# Created/updated userstamping 
+gem "mongoid_userstamp", "~> 0.2.1"
+
+# Versioning for mongoid
+gem "mongoid_delorean", "~> 1.1.1"
 
 # Database seeding
 gem "seed-fu"
 
 # Elasticsearch
-gem "stretcher"
+gem "stretcher", "~> 1.17.0"
 
 # OmniAuth-based authentication
-gem "devise"
+gem "devise", "~> 3.0.2"
 gem "omniauth"
 gem "omniauth-cas"
 gem "omniauth-google-oauth2"
@@ -33,7 +38,7 @@ gem "omniauth-myusa", :git => "https://github.com/GSA-OCSIT/omniauth-myusa.git"
 gem "omniauth-persona"
 
 # Form layout and display
-gem "simple_form"
+gem "simple_form", "~> 2.1.0"
 
 # Pagination
 gem "kaminari"
@@ -42,21 +47,24 @@ gem "kaminari"
 gem "tabs_on_rails"
 
 # Unobtrusive javascript for Rails helpers (things like delete links).
-gem "jquery-rails"
+gem "jquery-rails", "~> 3.0.4"
 
-gem "crummy"
+# Breadcrumbs
+gem "crummy", "~> 1.7.2"
 
-gem "client_side_validations", ">= 3.2.0"
-gem "client_side_validations-simple_form", ">= 2.0.0"
+gem "client_side_validations", "~> 3.2.6"
+gem "client_side_validations-simple_form", "~> 2.1.0"
 
 gem "nokogiri"
-gem "babosa"
+
+# For creating friendly URL slugs.
+gem "babosa", "~> 0.3.11"
 
 # For running the python pygmentize program
 gem "childprocess"
 
 # Views/templates for APIs
-gem "rabl"
+gem "rabl", "~> 0.8.6"
 
 # Country and state name lookups
 gem "countries"
@@ -97,11 +105,14 @@ group :assets do
   # Improve PNG speed for image sprite generation
   gem "oily_png", :platforms => [:ruby]
 
+  gem "ember-rails", "~> 0.13.0"
+  gem "ember-source", "~> 1.0.0.rc7"
+
   # JavaScript Backbone extensions
   gem "marionette-rails"
 
   # For JavaScript templates
-  gem "handlebars_assets"
+  #gem "handlebars_assets"
 end
 
 # Bundle gems for the local environment. Make sure to

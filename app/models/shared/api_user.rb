@@ -1,6 +1,8 @@
 class ApiUser
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Userstamp
+  include Mongoid::Delorean::Trackable
 
   field :api_key
   field :first_name
@@ -40,6 +42,7 @@ class ApiUser
     :message => "Check the box to agree to the terms and conditions."
 
   # Callbacks
+  before_validation :cleanup_roles
   before_validation :generate_api_key, :on => :create
 
   attr_accessor :terms_and_conditions
@@ -48,7 +51,7 @@ class ApiUser
   attr_accessible :first_name, :last_name, :email, :use_description,
     :terms_and_conditions
   attr_accessible :first_name, :last_name, :email, :use_description,
-    :terms_and_conditions, :unthrottled, :throttle_daily_limit,
+    :terms_and_conditions, :roles, :unthrottled, :throttle_daily_limit,
     :throttle_hourly_limit, :throttle_by_ip, :throttle_mode, :as => :admin
 
   # has_role? simply needs to return true or false whether a user has a role or not.  
@@ -70,6 +73,10 @@ class ApiUser
     else
       super
     end
+  end
+
+  def self.existing_roles
+    @existing_roles ||= ApiUser.distinct(:roles)
   end
 
   def as_json(*args)
@@ -108,6 +115,16 @@ class ApiUser
   end
 
   private
+
+  # Remove empty roles. This stems from how the Rails forms generate multi
+  # selects by default.
+  #
+  # http://stackoverflow.com/a/8933085
+  def cleanup_roles
+    if(self.roles.present?)
+      self.roles.reject! { |role| role.blank? }
+    end
+  end
 
   def generate_api_key
     unless self.api_key
