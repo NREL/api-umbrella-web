@@ -55,7 +55,6 @@ class Admin::ApiUsersController < Admin::BaseController
   private
 
   def save!
-    @api_user.no_domain_signup = true;
     @api_user.assign_attributes(params[:api_user], :as => :admin)
     @api_user.save!
   end
