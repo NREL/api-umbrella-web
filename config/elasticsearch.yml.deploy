@@ -2,7 +2,7 @@ development:
   server: "http://localhost:9200"
 
 staging:
-  server: "http://ip-10-144-147-253.ec2.internal:9200"
+  server: "http://10.0.10.159:9200"
 
 production:
   server: "http://ip-10-112-65-20.ec2.internal:9200"
