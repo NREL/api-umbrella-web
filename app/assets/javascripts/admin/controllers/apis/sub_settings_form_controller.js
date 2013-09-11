@@ -1,10 +1,7 @@
-Admin.ApisRewriteFormController = Admin.NestedFormController.extend({
-  titleBase: 'Rewrite',
+Admin.ApisSubSettingsFormController = Admin.NestedFormController.extend({
+  needs: ['apis_settings_fields'],
 
-  matcherTypeOptions: [
-    { id: "route", name: "Route Pattern" },
-    { id: "regex", name: "Regular Expression" },
-  ],
+  titleBase: 'Sub-URL Request Settings',
 
   httpMethodOptions: [
     { id: "any", name: "Any" },

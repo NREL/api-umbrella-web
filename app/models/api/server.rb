@@ -12,5 +12,6 @@ class Api::Server
   validates :port,
     :inclusion => { :in => 0..65535 }
 
-  attr_accessible :host, :port
+  # Mass assignment security
+  attr_accessible :_id, :host, :port
 end

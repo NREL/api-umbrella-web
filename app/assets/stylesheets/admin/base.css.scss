@@ -119,6 +119,14 @@ textarea.fill {
   margin-bottom: 2px;
 }
 
+.control-group {
+  margin-top: 5px;
+}
+
+.form-horizontal .control-group {
+  margin-bottom: 10px;
+}
+
 .form-horizontal.info .control-group {
   margin: 3px 0px 5px 0px;
 }
@@ -160,6 +168,14 @@ fieldset .table {
 
 .arrow i {
   color: #ddd;
+}
+
+.arrow-vertical {
+  margin: 0px;
+}
+
+.arrow-vertical i {
+  vertical-align: middle;
 }
 
 a {
@@ -236,4 +252,24 @@ a:hover {
   font-size: 11px;
   line-height: 13px;
   color: #777;
+}
+
+th.reorder-handle,
+td.reorder-handle {
+  display: none;
+  width: 60px;
+  text-align: center;
+  cursor: move;
+}
+
+.reorder-active {
+  th.reorder-handle,
+  td.reorder-handle {
+    display: table-cell;
+  }
+}
+
+.reorder-placeholder th,
+.reorder-placeholder td {
+  background-color: $warningBackground !important;
 }

@@ -7,4 +7,7 @@ class Api::UrlMatch
 
   # Relations
   embedded_in :api
+
+  # Mass assignment security
+  attr_accessible :_id, :frontend_prefix, :backend_prefix
 end

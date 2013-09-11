@@ -1,41 +1,55 @@
 class Admin::ApisController < Admin::BaseController
+  respond_to :json
   set_tab :apis
 
   def index
     @apis = Api.desc(:sort_order).desc(:_id).all
-
-    respond_to do |format|
-      format.json { render :json => { :apis => @apis } }
-    end
+    respond_with({ :apis => @apis })
   end
 
   def show
     @api = Api.find(params[:id])
-
-    respond_to do |format|
-      format.json { render :json => @api.to_json(:root => "api") }
-    end
+    respond_with(@api, :root => "api")
   end
 
   def create
     @api = Api.new
     save!
+    respond_with(@api, :root => "api")
   end
 
   def update
     @api = Api.find(params[:id])
     save!
+    respond_with(@api, :root => "api")
+  end
+
+  def destroy
+    @api = Api.find(params[:id])
+    @api.destroy
+    respond_with(@api, :root => "api")
   end
 
   private
 
   def save!
-    params[:api][:servers_attributes] = params[:api].delete(:servers) || []
-    params[:api][:url_matches_attributes] = params[:api].delete(:url_matches) || []
-    params[:api][:rewrites_attributes] = params[:api].delete(:rewrites) || []
-    params[:api][:rate_limits_attributes] = params[:api].delete(:rate_limits) || []
+    # Resort the incoming embedded arrays based on the virtual `sort_order`
+    # attribute. We won't store this value since the embedded array implicitly
+    # provides this sort value.
+    [:url_matches, :sub_settings, :rewrites].each do |collection|
+      if(params[:api][collection].present?)
+        # The virtual `sort_order` attribute will only be present if the data
+        # has been resorted by the user. Otherwise, we can just accept the
+        # incoming array order as correct.
+        if(params[:api][collection].first[:sort_order].present?)
+          params[:api][collection].sort_by! { |p| p[:sort_order] }
+        end
+
+        params[:api][collection].each { |p| p.delete(:sort_order) }
+      end
+    end
 
     @api.attributes = params[:api]
-    @api.save!
+    @api.save
   end
 end
