@@ -42,5 +42,5 @@ production:
     default:
       database: api_umbrella_production
       hosts:
-        - ip-10-112-65-20.ec2.internal:27017
-        - ip-10-28-250-152.ec2.internal:27017
+        - 10.0.10.37:27017
+        - 10.0.11.199:27017
