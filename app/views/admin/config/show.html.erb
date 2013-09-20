@@ -8,6 +8,8 @@
     </p>
 
     <% if(ConfigVersion.needs_publishing?) %>
+      <%# FIXME: Temporarily disable live config publishing until I'm a little more comfortable. %>
+      <% if(current_admin.username == "nick.muerdter@nrel.gov") %>
       <%= form_tag(admin_config_publish_path, :class => "text-center") do %>
         <button type="submit" id="publish_button" class="btn btn-large btn-primary" data-loading-text="<i class='icon-refresh icon-spin'></i> Publishing...">Publish</button>
       <% end %>
@@ -16,6 +18,11 @@
         $('form').submit(function(e) {
           button.button('loading');
         });
+      <% end %>
+      <% else %>
+        <div class="alert">
+          Contact the <%= mail_to("nick.muerdter@nrel.gov", "api.data.gov team") %> to publish your configuration changes.
+        </div>
       <% end %>
     <% else %>
       <div class="alert alert-success">
