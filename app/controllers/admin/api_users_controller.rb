@@ -51,7 +51,23 @@ class Admin::ApiUsersController < Admin::BaseController
   private
 
   def save!
+    before_roles = @api_user.roles || []
+
     @api_user.assign_attributes(params[:api_user], :as => :admin)
+
+    after_roles = @api_user.roles || []
+    all_roles = before_roles + after_roles
+
+    # FIXME: Temporary hack to prevent other admins from assign some specific
+    # roles. This should be removed once we have more granular admin
+    # permissions more robustly implemented.
+    if(all_roles.any? { |role| role.include?("whitehouse") })
+      if(@current_admin.username !~ /(eop.gov$|^nick.muerdter@nrel.gov$)/)
+        @api_user.errors[:roles] << "You are unauthorized to make changes to users with this role."
+        raise Mongoid::Errors::Validations.new(@api_user)
+      end
+    end
+
     @api_user.save!
   end
 end
