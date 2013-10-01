@@ -27,7 +27,7 @@ server {
   }
 
   set $maintenance "on";
-  if ($uri ~ ^/(government_shutdown|api)) {
+  if ($uri ~ ^/(government_shutdown|api|admin)) {
     set $maintenance "off";
   }
 
