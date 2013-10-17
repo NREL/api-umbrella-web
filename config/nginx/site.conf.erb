@@ -20,21 +20,6 @@ server {
   # Allow for larger request bodies to allow for huge documentation pages.
   client_max_body_size 10m;
 
-  # FIXME: Temporary government shutdown redirects.
-  error_page 503 @maintenance;
-  location @maintenance {
-    rewrite ^(.*)$ /government_shutdown/index.html break;
-  }
-
-  set $maintenance "on";
-  if ($uri ~ ^/(government_shutdown|api|admin|assets|javascripts)) {
-    set $maintenance "off";
-  }
-
-  if ($maintenance = on) {
-    return 503;
-  }
-
   # FIXME: Some static end points for temporary benchmarking.
   location /api/api-users/benchmark {
     default_type text/plain;
