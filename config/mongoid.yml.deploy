@@ -42,5 +42,5 @@ production:
     default:
       database: api_umbrella_production
       hosts:
-        - 10.0.10.37:27017
+        - 10.0.10.193:27017
         - 10.0.11.199:27017
