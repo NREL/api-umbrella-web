@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/GSA-OCSIT/omniauth-myusa.git
+  revision: f3a9c1fb315685e0d63c1028aca76aa11f99b4a4
+  specs:
+    omniauth-myusa (0.0.3)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+
+GIT
   remote: https://github.com/GUI/stretcher.git
   revision: e2d2e226a56d6c0e8dba20b225aa117babf0a242
   branch: optional-mash
@@ -32,22 +40,6 @@ GIT
       highline
       net-ssh (~> 2.4.0)
       tzinfo (>= 0.3.0)
-
-GIT
-  remote: https://github.com/GSA-OCSIT/omniauth-myusa.git
-  revision: f3a9c1fb315685e0d63c1028aca76aa11f99b4a4
-  specs:
-    omniauth-myusa (0.0.3)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
-
-GIT
-  remote: https://github.com/GUI/turbo-sprockets-rails3.git
-  revision: 668f13b55dcf03e1dd083acf5afa54ea754bf85b
-  specs:
-    turbo-sprockets-rails3 (0.3.6)
-      railties (> 3.2.8, < 4.0.0)
-      sprockets (>= 2.0.0)
 
 GIT
   remote: https://github.com/crafters/mongoid_delorean.git
