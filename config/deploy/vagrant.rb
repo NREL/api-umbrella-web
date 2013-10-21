@@ -3,6 +3,7 @@ require "capistrano_nrel_ext/recipes/vagrant_deploy"
 # Set the servers for this stage.
 role :app, "api.vagrant"
 role :web, "api.vagrant"
+role :migration, "api.vagrant"
 
 # Set the application being deployed.
 set :application, "web"

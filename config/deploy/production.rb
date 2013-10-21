@@ -3,6 +3,7 @@ require "dotenv/capistrano"
 # Set the servers for this stage.
 role :app, "web1.apidatagov.aws", "web2.apidatagov.aws"
 role :web, "web1.apidatagov.aws", "web2.apidatagov.aws"
+role :migration, "web1.apidatagov.aws"
 
 # Set the base path for deployment.
 set :deploy_to_base, "/srv"
