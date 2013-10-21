@@ -1,18 +1,28 @@
 module Admin::StatsHelper
   def facet_result(facet_name)
-    facet = @result.facets[facet_name]
+    facet = @result.facets[facet_name.to_s]
 
-    terms = facet[:terms]
-    if facet[:other] > 0
+    terms = facet["terms"]
+
+    if(facet["missing"] > 0)
+      if(terms.length < 10 || facet["missing"] >= terms.last["count"])
+        terms << {
+          "term" => "Missing / Unknown",
+          "count" => facet["missing"],
+        }
+      end
+    end
+
+    if(facet["other"] > 0)
       terms << {
-        :term => "Other",
-        :count => facet[:other],
+        "term" => "Other",
+        "count" => facet["other"],
       }
     end
 
-    total = @result.total
+    total = @result.total.to_f
     terms.each do |term|
-      term[:percent] = ((term[:count] / total.to_f) * 100).round
+      term["percent"] = ((term["count"] / total) * 100).round
     end
 
     terms
@@ -49,14 +59,14 @@ module Admin::StatsHelper
     columns = []
 
     if(@search.query[:facets][:regions][:terms][:field] == "request_ip_city")
-      city = term[:term]
+      city = term["term"]
       location = @result.cities[city]
 
       lat = nil
       lon = nil
       if location
-        lat = location[:lat].to_f
-        lon = location[:lon].to_f
+        lat = location["lat"].to_f
+        lon = location["lon"].to_f
       end
 
       columns += [
@@ -65,7 +75,7 @@ module Admin::StatsHelper
         { :v => city },
       ]
     else
-      columns << { :v => term[:term], :f => region_name(term[:term]) }
+      columns << { :v => term["term"], :f => region_name(term["term"]) }
     end
 
     columns

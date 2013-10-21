@@ -49,6 +49,7 @@ class LogSearch
 
   def result
     raw_result = @server.index(indexes.join(",")).search(@query_options, @query)
+
     @result = LogResult.new(self, raw_result)
   end
 
@@ -62,8 +63,16 @@ class LogSearch
     end
   end
 
+  def offset!(from)
+    @query_options[:from] = from
+  end
+
   def limit!(size)
     @query_options[:size] = size
+  end
+
+  def sort!(sort)
+    @query[:sort] = sort
   end
 
   def filter_by_date_range!
@@ -102,6 +111,15 @@ class LogSearch
       },
     }
   end
+
+  def filter_by_user_ids!(user_ids)
+    @query[:query][:filtered][:filter][:and] << {
+      :terms => {
+        :user_id => user_ids,
+      },
+    }
+  end
+
 
   def facet_by_interval!
     @query[:facets][:interval_hits] = {
@@ -183,8 +201,9 @@ class LogSearch
     }
   end
 
-  def facet_by_term!(term, size)
-    @query[:facets][term.to_sym] = {
+  def facet_by_term!(term, size, options = {})
+    facet_name = options[:facet_name] || term
+    @query[:facets][facet_name.to_sym] = {
       :terms => {
         :field => term.to_s,
         :size => size,
@@ -194,26 +213,51 @@ class LogSearch
 
   def facet_by_users!(size)
     facet_by_term!(:user_email, size)
+    facet_by_term!(:user_email, 1000000, :facet_name => :total_user_email)
   end
 
   def facet_by_response_status!(size)
     facet_by_term!(:response_status, size)
+    facet_by_term!(:response_status, 1000000, :facet_name => :total_response_status)
   end
 
   def facet_by_response_content_type!(size)
     facet_by_term!(:response_content_type, size)
+    facet_by_term!(:response_content_type, 1000000, :facet_name => :total_response_content_type)
   end
 
   def facet_by_request_method!(size)
     facet_by_term!(:request_method, size)
+    facet_by_term!(:request_method, 1000000, :facet_name => :total_request_method)
   end
 
   def facet_by_request_ip!(size)
     facet_by_term!(:request_ip, size)
+    facet_by_term!(:request_ip, 1000000, :facet_name => :total_request_ip)
   end
 
   def facet_by_request_user_agent_family!(size)
     facet_by_term!(:request_user_agent_family, size)
+    facet_by_term!(:request_user_agent_family, 1000000, :facet_name => :total_request_user_agent_family)
+  end
+
+  def facet_by_user_stats!(options = {})
+    @query[:facets][:user_stats] = {
+      :terms_stats => {
+        :key_field => :user_id,
+        :value_field => :request_at,
+        :size => 0,
+        :order => "count",
+      }.merge(options),
+    }
+  end
+
+  def facet_by_response_time_stats!
+    @query[:facets][:response_time_stats] = {
+      :statistical => {
+        :field => :response_time,
+      },
+    }
   end
 
   private

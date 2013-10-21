@@ -1,4 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 
 gem "rails", "~> 3.2.14"
 
@@ -17,18 +17,26 @@ gem "mongoid", "~> 3.1.4"
 # Structure trees of mongoid documents
 gem "mongoid-tree", "~> 1.0.3", :require => "mongoid/tree"
 
-# Created/updated userstamping 
+# Created/updated userstamping
 gem "mongoid_userstamp", "~> 0.2.1"
 
 # Versioning for mongoid
 # This git branch fixes embeds_one functionality.
 gem "mongoid_delorean", "~> 1.1.1", :git => "https://github.com/crafters/mongoid_delorean.git"
 
+# Data migrations
+gem "mongoid_rails_migrations"
+
+# Generate UUIDs
+gem "uuidtools"
+
 # Database seeding
 gem "seed-fu"
 
 # Elasticsearch
-gem "stretcher", "~> 1.19.0"
+# This git branch allows access to the ruby hash for responses to improve
+# performance: https://github.com/PoseBiz/stretcher/pull/70
+gem "stretcher", "~> 1.21.0", :git => "https://github.com/GUI/stretcher.git", :branch => "optional-mash"
 
 # OmniAuth-based authentication
 gem "devise", "~> 3.0.3"
@@ -78,6 +86,9 @@ gem "settingslogic"
 gem "ember-rails", "~> 0.13.0"
 gem "ember-source", "~> 1.0.0"
 
+# HTML diffs
+gem "diffy"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -110,12 +121,6 @@ group :assets do
 
   # Improve PNG speed for image sprite generation
   gem "oily_png", :platforms => [:ruby]
-
-  # JavaScript Backbone extensions
-  gem "marionette-rails"
-
-  # For JavaScript templates
-  #gem "handlebars_assets"
 end
 
 # Bundle gems for the local environment. Make sure to
@@ -136,7 +141,7 @@ end
 group :development do
   # Deployment
   gem "capistrano-ext"
-  gem "capistrano_nrel_ext", :git => "http://github.com/NREL/capistrano_nrel_ext.git"
+  gem "capistrano_nrel_ext", :git => "https://github.com/NREL/capistrano_nrel_ext.git"
 
   gem "torquebox-server", :platforms => [:jruby]
 

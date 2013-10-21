@@ -2,11 +2,12 @@ object false
 
 extends "admin/stats/_interval_hits"
 
-node :totals do
+node :stats do
   {
-    :hits => @result.total,
-    :users => @result.facets[:user_email].terms.length + @result.facets[:user_email][:other],
-    :ips => @result.facets[:request_ip].terms.length + @result.facets[:request_ip][:other],
+    :total_hits => @result.total,
+    :total_users => @result.facets["total_user_email"]["terms"].length,
+    :total_ips => @result.facets["total_request_ip"]["terms"].length,
+    :average_response_time => @result.facets["response_time_stats"]["mean"],
   }
 end
 
@@ -19,9 +20,9 @@ node :facets do
 end
 
 node :logs do
-  @result.results.map do |log|
-    log.except(:api_key, :_type, :_score, :_index).merge({
-      :request_url => log.request_url.gsub(%r{^.*://[^/]*}, "")
+  @result.documents.map do |log|
+    log.except("api_key", "_type", "_score", "_index").merge({
+      "request_url" => log["request_url"].gsub(%r{^.*://[^/]*}, "")
     })
   end
 end
