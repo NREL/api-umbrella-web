@@ -30,3 +30,6 @@ set :dotenv_path, "/home/dotenv/env"
 
 # Perform mongoid migrations from mongoid_rails_migrations.
 set :rails_auto_migrate, true
+
+# Set the user the web server runs as.
+set :web_server_user, "www-data-local"
