@@ -18,11 +18,11 @@ gem "mongoid", "~> 3.1.4"
 gem "mongoid-tree", "~> 1.0.3", :require => "mongoid/tree"
 
 # Created/updated userstamping
-gem "mongoid_userstamp", "~> 0.2.1"
+gem "mongoid_userstamp", "~> 0.3.0"
 
 # Versioning for mongoid
 # This git branch fixes embeds_one functionality.
-gem "mongoid_delorean", "~> 1.1.1", :git => "https://github.com/crafters/mongoid_delorean.git"
+gem "mongoid_delorean", "~> 1.1.1", :git => "https://github.com/GUI/mongoid_delorean.git"
 
 # Data migrations
 gem "mongoid_rails_migrations"
@@ -83,8 +83,8 @@ gem "countries"
 gem "settingslogic"
 
 # Ember.js
-gem "ember-rails", "~> 0.13.0"
-gem "ember-source", "~> 1.0.0"
+gem "ember-rails", "~> 0.14.0"
+gem "ember-source", "~> 1.1.2"
 
 # HTML diffs
 gem "diffy"

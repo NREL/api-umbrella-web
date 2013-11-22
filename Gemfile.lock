@@ -7,6 +7,13 @@ GIT
       omniauth-oauth2 (~> 1.0)
 
 GIT
+  remote: https://github.com/GUI/mongoid_delorean.git
+  revision: 3bb4e4bfc0670079a8a5ae0c284a0590594e525b
+  specs:
+    mongoid_delorean (1.1.1)
+      mongoid (>= 3.0.0)
+
+GIT
   remote: https://github.com/GUI/stretcher.git
   revision: e2d2e226a56d6c0e8dba20b225aa117babf0a242
   branch: optional-mash
@@ -40,13 +47,6 @@ GIT
       highline
       net-ssh (~> 2.4.0)
       tzinfo (>= 0.3.0)
-
-GIT
-  remote: https://github.com/crafters/mongoid_delorean.git
-  revision: a9741d2b51ca6be51c392b23ef459368757f0533
-  specs:
-    mongoid_delorean (1.1.1)
-      mongoid (>= 3.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -139,23 +139,24 @@ GEM
       dotenv (= 0.9.0)
     edn (1.0.0)
       parslet (~> 1.4.0)
-    ember-data-source (0.13)
+    ember-data-source (0.14)
       ember-source
-    ember-rails (0.13.0)
+    ember-rails (0.14.0)
       active_model_serializers
       barber (>= 0.4.1)
       ember-data-source
       ember-source
       execjs (>= 1.2)
       handlebars-source
+      jquery-rails (>= 1.0.17)
       railties (>= 3.1)
-    ember-source (1.0.0)
+    ember-source (1.1.2)
       handlebars-source (= 1.0.12)
     erubis (2.7.0)
     eventmachine (1.0.3)
     eventmachine (1.0.3-java)
     excon (0.27.6)
-    execjs (2.0.1)
+    execjs (2.0.2)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.1)
@@ -189,8 +190,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jruby-pageant (1.1.1)
     jruby-pageant (1.1.1-java)
-    json (1.8.0)
-    json (1.8.0-java)
+    json (1.8.1)
+    json (1.8.1-java)
     jwt (0.1.8)
       multi_json (>= 1.5)
     kaminari (0.14.1)
@@ -206,11 +207,11 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     mini_portile (0.5.1)
-    mongoid (3.1.4)
+    mongoid (3.1.5)
       activemodel (~> 3.2)
       moped (~> 1.4)
       origin (~> 1.0)
-      tzinfo (~> 0.3.22)
+      tzinfo (~> 0.3.29)
     mongoid-tree (1.0.3)
       mongoid (>= 3.0, <= 4.0)
     mongoid_rails_migrations (1.0.1)
@@ -218,7 +219,7 @@ GEM
       bundler (>= 1.0.0)
       rails (>= 3.2.0)
       railties (>= 3.2.0)
-    mongoid_userstamp (0.2.1)
+    mongoid_userstamp (0.3.0)
       mongoid (>= 3.0.4)
     moped (1.5.1)
     multi_json (1.8.2)
@@ -414,8 +415,8 @@ DEPENDENCIES
   devise (~> 3.0.3)
   diffy
   dotenv-rails
-  ember-rails (~> 0.13.0)
-  ember-source (~> 1.0.0)
+  ember-rails (~> 0.14.0)
+  ember-source (~> 1.1.2)
   factory_girl_rails
   jquery-rails (~> 3.0.4)
   kaminari
@@ -425,7 +426,7 @@ DEPENDENCIES
   mongoid-tree (~> 1.0.3)
   mongoid_delorean (~> 1.1.1)!
   mongoid_rails_migrations
-  mongoid_userstamp (~> 0.2.1)
+  mongoid_userstamp (~> 0.3.0)
   nokogiri
   oily_png
   oj
