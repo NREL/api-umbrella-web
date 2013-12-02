@@ -2,7 +2,7 @@ class Api::Settings
   include Mongoid::Document
 
   # Fields
-  field :_id, type: String, default: lambda { UUIDTools::UUID.random_create.to_s }
+  field :_id, :type => String, :default => lambda { UUIDTools::UUID.random_create.to_s }
   field :append_query_string, :type => String
   field :http_basic_auth, :type => String
   field :require_https, :type => Boolean
@@ -64,10 +64,9 @@ class Api::Settings
   end
 
   def error_templates=(templates)
-    if(templates.present?)
-      templates.reject! { |key, value| value.blank? }
-      self[:error_templates] = templates
-    end
+    templates ||= {}
+    templates.reject! { |key, value| value.blank? }
+    self[:error_templates] = templates
   end
 
   def error_data_yaml_strings
@@ -91,15 +90,16 @@ class Api::Settings
       if(strings.present?)
         strings.each do |key, value|
           if value.present?
-            data[key] = Psych.load(value)
+            data[key] = SafeYAML.load(value)
           end
         end
       end
 
       self.error_data = data
-    rescue Psych::SyntaxError
+    rescue Psych::SyntaxError => error
       # Ignore YAML errors, we'll deal with validating during
       # validate_error_data_yaml_strings.
+      logger.info("YAML parsing error: #{error.message}")
     end
   end
 
@@ -111,7 +111,7 @@ class Api::Settings
       strings.each do |key, value|
         if value.present?
           begin
-            Psych.load(value)
+            SafeYAML.load(value)
           rescue Psych::SyntaxError => error
             self.errors.add("error_data_yaml_strings.#{key}", "YAML parsing error: #{error.message}")
           end
