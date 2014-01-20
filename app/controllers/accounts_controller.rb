@@ -6,7 +6,9 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @user = ApiUser.new(params[:api_user])
+    @user = ApiUser.new
+    @user.attributes = params[:api_user]
+    @user.registration_source = "web"
 
     # Safe safely to be absolutely positive the save succeeded.
     if @user.with(:safe => true).save

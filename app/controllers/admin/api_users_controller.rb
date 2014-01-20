@@ -63,6 +63,10 @@ class Admin::ApiUsersController < Admin::BaseController
       end
     end
 
+    if(@api_user.new_record?)
+      @api_user.registration_source = "web_admin"
+    end
+
     @api_user.save
   end
 end
