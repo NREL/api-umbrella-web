@@ -101,12 +101,13 @@ module ApiUmbrella
 
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.default_url_options = {
-      :host => 'example.com',
+      :host => 'api.data.gov',
     }
 
     config.action_mailer.smtp_settings = {
       :address => 'smtp.mandrillapp.com',
       :port => 465,
+      :ssl => true,
       :domain => 'api.data.gov',
       :authentication => 'login',
       :user_name => ENV['MANDRILL_USERNAME'],
