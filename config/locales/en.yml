@@ -1,4 +1,5 @@
 en:
+  site_name: api.data.gov
   twitter_account: usdatagov
   breadcrumb_divider: "&raquo;"
   omniauth_providers:
