@@ -90,5 +90,14 @@ module ApiUmbrella
     config.action_mailer.default_url_options = {
       :host => 'example.com',
     }
+
+    config.action_mailer.smtp_settings = {
+      :address => 'smtp.mandrillapp.com',
+      :port => 465,
+      :domain => 'api.data.gov',
+      :authentication => 'login',
+      :user_name => ENV['MANDRILL_USERNAME'],
+      :password => ENV['MANDRILL_PASSWORD'],
+    }
   end
 end
