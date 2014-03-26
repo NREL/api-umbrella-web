@@ -21,22 +21,31 @@ ApiUmbrella::Application.routes.draw do
 
   root :to => "pages#home"
 
-  namespace :api do
-    resources :api_users, :path => "api-users", :only => [:show, :create] do
-      member do
-        get "validate"
+  # Mount the API at both /api/ and /api-umbrella/ for backwards compatibility.
+  %w(api api-umbrella).each do |path|
+    namespace(:api, :path => path) do
+      resources :api_users, :path => "api-users", :only => [:show, :create] do
+        member do
+          get "validate"
+        end
       end
-    end
 
-    resources :health_checks, :path => "health-checks", :only => [] do
-      collection do
-        get :ip
-        get :logging
+      resources :health_checks, :path => "health-checks", :only => [] do
+        collection do
+          get :ip
+          get :logging
+        end
       end
-    end
 
-    resource :hooks, :only => [] do
-      post "publish_static_site"
+      resource :hooks, :only => [] do
+        post "publish_static_site"
+      end
+
+      namespace :v1 do
+        resources :admins
+        resources :apis
+        resources :users
+      end
     end
   end
 
@@ -50,7 +59,13 @@ ApiUmbrella::Application.routes.draw do
   match "/admin" => "admin/base#empty"
 
   namespace :admin do
-    resources :api_users
+    resources :admins, :only => [:index]
+    resources :api_users, :only => [:index]
+    resources :apis, :only => [:index] do
+      member do
+        put "move_to"
+      end
+    end
 
     resources :stats, :only => [:index] do
       collection do
@@ -61,8 +76,6 @@ ApiUmbrella::Application.routes.draw do
       end
     end
 
-    resources :apis
-
     namespace :config do
       get "publish", :action => "show"
       post "publish", :action => "create"
@@ -71,10 +84,6 @@ ApiUmbrella::Application.routes.draw do
       get "export"
       post "import_preview"
       post "import"
-    end
-
-    resources :admins do
-      get "page/:page", :action => :index, :on => :collection
     end
 
     resources :api_doc_services do
