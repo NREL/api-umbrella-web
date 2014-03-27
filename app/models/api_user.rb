@@ -51,11 +51,15 @@ class ApiUser
       :message => "Provide a valid email address.",
     }
   validates :terms_and_conditions,
-    :acceptance => { :message => "Check the box to agree to the terms and conditions." },
+    :acceptance => {
+      :message => "Check the box to agree to the terms and conditions.",
+      :accept => true,
+    },
     :on => :create,
     :allow_nil => false
 
   # Callbacks
+  before_validation :normalize_terms_and_conditions
   before_validation :generate_api_key, :on => :create
   after_save :handle_rate_limit_mode
 
@@ -71,7 +75,7 @@ class ApiUser
     :terms_and_conditions,
     :registration_source,
     :as => [:default, :admin]
-  attr_accessible :roles_string,
+  attr_accessible :roles,
     :throttle_by_ip,
     :enabled,
     :settings_attributes,
@@ -134,28 +138,6 @@ class ApiUser
     end
   end
 
-  def roles_string
-    unless @roles_string
-      @roles_string = ""
-      if self.roles.present?
-        @roles_string = self.roles.join(",")
-      end
-    end
-
-    @roles_string
-  end
-
-  def roles_string=(string)
-    @roles_string = string
-
-    roles = nil
-    if(string.present?)
-      roles = string.split(",").map { |role| role.strip }
-    end
-
-    self.roles = roles
-  end
-
   def api_key_preview
     self.api_key.truncate(9)
   end
@@ -165,6 +147,13 @@ class ApiUser
   end
 
   private
+
+  def normalize_terms_and_conditions
+    # Handle the acceptance validation regardless of if it comes from the JSON
+    # api (true values) or from an HTML form ('1' values).
+    self.terms_and_conditions = (self.terms_and_conditions == true || self.terms_and_conditions == '1')
+    true
+  end
 
   def generate_api_key
     unless self.api_key

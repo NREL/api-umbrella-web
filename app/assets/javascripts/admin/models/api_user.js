@@ -12,7 +12,7 @@ Admin.ApiUser = Ember.Model.extend({
   termsAndConditions: Ember.attr(),
   sendWelcomeEmail: Ember.attr(),
   throttleByIp: Ember.attr(),
-  rolesString: Ember.attr(),
+  roles: Ember.attr(),
   enabled: Ember.attr(),
   createdAt: Ember.attr(),
   updatedAt: Ember.attr(),
@@ -45,17 +45,21 @@ Admin.ApiUser = Ember.Model.extend({
     }
   },
 
-  toJSON: function() {
-    var json = this._super();
-
-    // Translate the terms_and_conditions checkbox into the string '1' if true.
-    // This is to match how validates_acceptance_of accepts things.
-    if(json.api_user && json.api_user.terms_and_conditions === true) {
-      json.api_user.terms_and_conditions = '1';
+  rolesString: function(key, value) {
+    // Setter
+    if(arguments.length > 1) {
+      var roles = value.split(',');
+      this.set('roles', roles);
     }
 
-    return json;
-  },
+    // Getter
+    var rolesString = '';
+    if(this.get('roles')) {
+      rolesString = this.get('roles').join(',');
+    }
+
+    return rolesString;
+  }.property('roles'),
 })
 
 Admin.ApiUser.url = "/api-umbrella/v1/users";
