@@ -46,8 +46,13 @@ class Api::V1::UsersController < Api::V1::BaseController
   def save!
     before_roles = @api_user.roles || []
 
+    assign_options = {}
+    if(admin_signed_in?)
+      assign_options[:as] = :admin
+    end
+
     @api_user.no_domain_signup = true
-    @api_user.assign_nested_attributes(params[:user], :as => :admin)
+    @api_user.assign_nested_attributes(params[:user], assign_options)
 
     after_roles = @api_user.roles || []
     all_roles = before_roles + after_roles
@@ -62,8 +67,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       end
     end
 
-    if(@api_user.new_record?)
-      @api_user.registration_source = "web_admin"
+    if(@api_user.new_record? && @api_user.registration_source.blank?)
+      @api_user.registration_source = "api"
     end
   end
 

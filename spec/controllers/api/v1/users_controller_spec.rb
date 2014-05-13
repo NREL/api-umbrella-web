@@ -145,6 +145,50 @@ describe Api::V1::UsersController do
       post :create, params
       response.headers["Access-Control-Allow-Origin"].should eql("*")
     end
+
+    it "allows admins to set private fields" do
+      p = params
+      p[:user][:roles] = ["admin"]
+
+      request.env["HTTP_X_ADMIN_AUTH_TOKEN"] = @admin.authentication_token
+      post :create, p
+
+      response.status.should eql(success_response_status)
+
+      data = MultiJson.load(response.body)
+      user = ApiUser.find(data["user"]["id"])
+      user.roles.should eql(["admin"])
+    end
+
+    it "disallows non-admins to set private fields" do
+      p = params
+      p[:user][:roles] = ["admin"]
+
+      request.env["HTTP_X_API_ROLES"] = "api-umbrella-key-creator"
+      post :create, p
+
+      response.status.should eql(success_response_status)
+
+      data = MultiJson.load(response.body)
+      user = ApiUser.find(data["user"]["id"])
+      user.roles.should eql(nil)
+    end
+
+    it "defaults the registration source to 'api'" do
+      request.env["HTTP_X_ADMIN_AUTH_TOKEN"] = @admin.authentication_token
+      post :create, params
+      data = MultiJson.load(response.body)
+      data["user"]["registration_source"].should eql("api")
+    end
+
+    it "allows setting a custom registration source" do
+      request.env["HTTP_X_ADMIN_AUTH_TOKEN"] = @admin.authentication_token
+      p = params
+      p[:user][:registration_source] = "whatever"
+      post :create, p
+      data = MultiJson.load(response.body)
+      data["user"]["registration_source"].should eql("whatever")
+    end
   end
 
   describe "PUT update" do
@@ -174,6 +218,14 @@ describe Api::V1::UsersController do
 
       user = ApiUser.find(@api_user.id)
       user.first_name.should eql("Bob")
+    end
+
+    it "leaves existing registration sources alone" do
+      user = FactoryGirl.create(:api_user, :registration_source => "something")
+      request.env["HTTP_X_ADMIN_AUTH_TOKEN"] = @admin.authentication_token
+      put :update, params.merge(:id => user.id)
+      data = MultiJson.load(response.body)
+      data["user"]["registration_source"].should eql("something")
     end
   end
 end
