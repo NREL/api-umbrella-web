@@ -238,7 +238,7 @@ Devise.setup do |config|
   config.omniauth :myusa,
     ENV["MYUSA_OAUTH_CLIENT_ID"],
     ENV["MYUSA_OAUTH_CLIENT_SECRET"],
-    :scope => "profile"
+    :scope => "profile.email"
 
   config.omniauth :cas,
     :host => "login.max.gov",
