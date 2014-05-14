@@ -28,6 +28,16 @@ GIT
       net-ssh (~> 2.4.0)
       tzinfo (>= 0.3.0)
 
+GIT
+  remote: https://github.com/dandorman/omniauth-cas.git
+  revision: 83210ff52667c2c4574666dcfc9b577542fb595f
+  branch: bump-omniauth-version
+  specs:
+    omniauth-cas (1.0.4)
+      addressable (~> 2.3)
+      nokogiri (~> 1.5)
+      omniauth (~> 1.2.0)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -252,10 +262,6 @@ GEM
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
-    omniauth-cas (1.0.4)
-      addressable (~> 2.3)
-      nokogiri (~> 1.6)
-      omniauth (~> 1.1.0)
     omniauth-google-oauth2 (0.2.2)
       omniauth (~> 1.0)
       omniauth-oauth2
@@ -521,7 +527,7 @@ DEPENDENCIES
   oily_png (~> 1.1.1)
   oj (~> 2.6.1)
   omniauth (~> 1.2.1)
-  omniauth-cas (~> 1.0.4)
+  omniauth-cas (~> 1.0.4)!
   omniauth-google-oauth2 (~> 0.2.2)
   omniauth-myusa!
   omniauth-persona (~> 0.0.1)

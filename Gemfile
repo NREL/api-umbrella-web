@@ -48,7 +48,7 @@ gem "devise", "~> 3.2.4"
 gem "omniauth", "~> 1.2.1"
 gem "omniauth-google-oauth2", "~> 0.2.2"
 gem "omniauth-persona", "~> 0.0.1"
-gem "omniauth-cas", "~> 1.0.4"
+gem "omniauth-cas", "~> 1.0.4", :git => "https://github.com/dandorman/omniauth-cas.git", :branch => "bump-omniauth-version"
 gem "omniauth-myusa", :git => "https://github.com/GSA-OCSIT/omniauth-myusa.git"
 
 # Form layout and display
