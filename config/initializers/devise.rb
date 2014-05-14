@@ -238,7 +238,15 @@ Devise.setup do |config|
   config.omniauth :myusa,
     ENV["MYUSA_OAUTH_CLIENT_ID"],
     ENV["MYUSA_OAUTH_CLIENT_SECRET"],
-    :scope => "profile.email"
+    :scope => "profile.email",
+    :client_options => {
+      # FIXME: Something seems to be amiss with my.usa.gov's cert. Browsers
+      # seem okay with it, but command line tools like Ruby and Curl don't like
+      # it. For now, disable verification, but we shouldn't keep it this way.
+      :ssl => {
+        :verify => false,
+      },
+    }
 
   config.omniauth :cas,
     :host => "login.max.gov",
