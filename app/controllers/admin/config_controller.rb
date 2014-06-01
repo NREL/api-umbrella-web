@@ -1,6 +1,7 @@
 class Admin::ConfigController < Admin::BaseController
   set_tab :config
 
+  before_filter :setup_allowed_publishers, :only => [:show, :create]
   before_filter :setup_import, :only => [:import_preview, :import]
 
   helper_method :simplify_import_data
@@ -13,6 +14,11 @@ class Admin::ConfigController < Admin::BaseController
   end
 
   def create
+    if(@allowed_config_publishers && !@allowed_config_publishers.include?(current_admin.username))
+      render(:status => :forbidden)
+      return false
+    end
+
     ConfigVersion.publish!
 
     flash[:success] = "Successfully published configuration... Changes should be live in a few seconds..."
@@ -97,6 +103,16 @@ class Admin::ConfigController < Admin::BaseController
   end
 
   private
+
+  def setup_allowed_publishers
+    if(ENV["ALLOWED_CONFIG_PUBLISHERS"])
+      @allowed_config_publishers = ENV["ALLOWED_CONFIG_PUBLISHERS"].to_s.split(",")
+    end
+
+    if(Rails.env == "production")
+      @allowed_config_publishers ||= []
+    end
+  end
 
   def simplify_import_data(data)
     # Don't look at timestamp/userstamp/versioning fields when comparing the
