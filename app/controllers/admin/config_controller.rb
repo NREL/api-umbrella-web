@@ -15,7 +15,7 @@ class Admin::ConfigController < Admin::BaseController
 
   def create
     if(@allowed_config_publishers && !@allowed_config_publishers.include?(current_admin.username))
-      render(:status => :forbidden)
+      render(:text => "Forbidden", :status => :forbidden)
       return false
     end
 

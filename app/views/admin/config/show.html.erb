@@ -8,7 +8,7 @@
     </p>
 
     <% if(ConfigVersion.needs_publishing?) %>
-      <% if(@allowed_config_publishers && @allowed_config_publishers.include?(current_admin.username)) %>
+      <% if(!@allowed_config_publishers || @allowed_config_publishers.include?(current_admin.username)) %>
         <%= form_tag(admin_config_publish_path, :class => "text-center") do %>
           <button type="submit" id="publish_button" class="btn btn-large btn-primary" data-loading-text="<i class='icon-refresh icon-spin'></i> Publishing...">Publish</button>
         <% end %>
@@ -33,7 +33,7 @@
 </div>
 
 <% if(ConfigVersion.needs_publishing?) %>
-  <% if(@allowed_config_publishers && @allowed_config_publishers.include?(current_admin.username)) %>
+  <% if(!@allowed_config_publishers || @allowed_config_publishers.include?(current_admin.username)) %>
     <div class="row-fluid">
       <style type="text/css">
         <%= Diffy::CSS.html_safe %>
