@@ -9,8 +9,8 @@ role :migration, "stage-web1.apidatagov.aws"
 set :deploy_to_base, "/srv"
 
 # Set the accessible web domain for this site.
-set :base_domain, "stage-api.privatedns.org"
-set :base_domain_aliases, ["stage-api.data.gov", "stage-api.anydns.com"]
+set :base_domain, "api-stage.18f.us"
+set :base_domain_aliases, ["stage-api.privatedns.org"]
 
 # Production-ready deployments should exclude git data.
 set :copy_exclude, [".git"]
