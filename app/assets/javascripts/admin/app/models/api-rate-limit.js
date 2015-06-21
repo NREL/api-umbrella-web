@@ -1,4 +1,6 @@
-Admin.ApiRateLimit = Ember.Model.extend({
+import Ember from 'ember';
+
+var ApiRateLimit = Ember.Model.extend({
   id: Ember.attr(),
   duration: Ember.attr(Number),
   limitBy: Ember.attr(),
@@ -62,6 +64,7 @@ Admin.ApiRateLimit = Ember.Model.extend({
     return json;
   },
 });
+ApiRateLimit.primaryKey = 'id';
+ApiRateLimit.camelizeKeys = true;
 
-Admin.ApiRateLimit.primaryKey = 'id';
-Admin.ApiRateLimit.camelizeKeys = true;
+export default ApiRateLimit;

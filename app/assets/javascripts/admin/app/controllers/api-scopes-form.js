@@ -1,4 +1,7 @@
-Admin.ApiScopesFormController = Ember.ObjectController.extend(Admin.Save, {
+import Ember from 'ember';
+import Save from '/api-umbrella-admin/save';
+
+var ApiScopesFormController = Ember.ObjectController.extend(Save, {
   actions: {
     submit: function() {
       this.save({
@@ -9,5 +12,4 @@ Admin.ApiScopesFormController = Ember.ObjectController.extend(Admin.Save, {
   },
 });
 
-Admin.ApiScopesEditController = Admin.ApiScopesFormController.extend();
-Admin.ApiScopesNewController = Admin.ApiScopesFormController.extend();
+export default ApiScopesFormController;

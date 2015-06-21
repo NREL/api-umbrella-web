@@ -1,4 +1,7 @@
-Admin.ApiSettingsFieldsComponent = Ember.Component.extend({
+import Ember from 'ember';
+import ApiUserRole from '/api-umbrella-admin/models/api-user-role';
+
+var ApiSettingsFieldsComponent = Ember.Component.extend({
   requireHttpsOptions: [
     { id: null, name: polyglot.t('admin.api.settings.require_https_options.inherit') },
     { id: 'required_return_error', name: polyglot.t('admin.api.settings.require_https_options.required_return_error') },
@@ -22,8 +25,10 @@ Admin.ApiSettingsFieldsComponent = Ember.Component.extend({
   ],
 
   roleOptions: function() {
-    return Admin.ApiUserRole.find();
+    return ApiUserRole.find();
     // Don't cache this property, so we can rely on refreshing the underlying
     // model to refresh the options.
   }.property().cacheable(false),
 });
+
+export default ApiSettingsFieldsComponent;

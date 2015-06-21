@@ -1,4 +1,6 @@
-Admin.StatsMapController = Admin.StatsBaseController.extend({
+import StatsBaseController from '/api-umbrella-admin/controllers/stats-base';
+
+var StatsMapController = StatsBaseController.extend({
   breadcrumbs: function() {
     var crumbs = [];
 
@@ -23,8 +25,4 @@ Admin.StatsMapController = Admin.StatsBaseController.extend({
   }.property('query.params', 'query.params.query', 'query.params.search', 'query.params.start_at', 'query.params.end_at'),
 });
 
-Admin.StatsMapDefaultController = Admin.StatsMapController.extend({
-  renderTemplate: function() {
-    this.render('stats/users');
-  }
-});
+export default StatsMapController;

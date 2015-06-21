@@ -1,2 +1,6 @@
-Admin.StatsLogsView = Ember.View.extend({
+import Ember from 'ember';
+
+var StatsLogsView = Ember.View.extend({
 });
+
+export default StatsLogsView;

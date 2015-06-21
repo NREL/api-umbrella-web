@@ -1,4 +1,7 @@
-Admin.AdminGroupsTableView = Ember.View.extend({
+import Ember from 'ember';
+import DataTablesHelpers from '/api-umbrella-admin/data-tables-helpers';
+
+var AdminGroupsTableView = Ember.View.extend({
   tagName: 'table',
 
   classNames: ['table', 'table-striped', 'table-bordered', 'table-condensed'],
@@ -26,15 +29,17 @@ Admin.AdminGroupsTableView = Ember.View.extend({
         {
           data: 'api_scope_display_names',
           title: 'API Scopes',
-          render: Admin.DataTablesHelpers.renderListEscaped,
+          render: DataTablesHelpers.renderListEscaped,
         },
         {
           data: 'permission_display_names',
           title: 'Access',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderListEscaped,
+          render: DataTablesHelpers.renderListEscaped,
         }
       ]
     });
   },
 });
+
+export default AdminGroupsTableView;

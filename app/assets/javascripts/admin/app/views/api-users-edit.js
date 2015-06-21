@@ -1,4 +1,6 @@
-Admin.ApiUsersEditView = Ember.View.extend({
+import Ember from 'ember';
+
+var ApiUsersEditView = Ember.View.extend({
   // If an admin creates an account, we show the full API key for 10 minutes.
   // Afterwards, we hide the full API key and it is no longer returned. This
   // hides it in the event the window or data stays loaded for that entire
@@ -22,3 +24,5 @@ Admin.ApiUsersEditView = Ember.View.extend({
     }
   },
 });
+
+export default ApiUsersEditView;

@@ -1,4 +1,6 @@
-Admin.ApisBaseRoute = Ember.Route.extend({
+import Ember from 'ember';
+
+var ApisBaseRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('model', model);
 
@@ -6,3 +8,5 @@ Admin.ApisBaseRoute = Ember.Route.extend({
     $('ul.nav li.nav-config').addClass('active');
   },
 });
+
+export default ApisBaseRoute;

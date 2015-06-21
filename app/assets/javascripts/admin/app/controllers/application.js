@@ -1,3 +1,7 @@
-Admin.ApplicationController = Ember.ObjectController.extend({
+import Ember from 'ember';
+
+var ApplicationController = Ember.ObjectController.extend({
   isLoading: null,
 });
+
+export default ApplicationController;

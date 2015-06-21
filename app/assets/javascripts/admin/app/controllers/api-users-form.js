@@ -1,4 +1,8 @@
-Admin.ApiUsersFormController = Ember.ObjectController.extend(Admin.Save, {
+import Ember from 'ember';
+import Save from '/api-umbrella-admin/save';
+import ApiUserRole from '/api-umbrella-admin/models/api-user-role';
+
+var ApiUsersFormController = Ember.ObjectController.extend(Save, {
   throttleByIpOptions: [
     { id: false, name: 'Rate limit by API key' },
     { id: true, name: 'Rate limit by IP address' },
@@ -10,7 +14,7 @@ Admin.ApiUsersFormController = Ember.ObjectController.extend(Admin.Save, {
   ],
 
   roleOptions: function() {
-    return Admin.ApiUserRole.find();
+    return ApiUserRole.find();
     // Don't cache this property, so we can rely on refreshing the underlying
     // model to refresh the options.
   }.property().cacheable(false),
@@ -32,5 +36,4 @@ Admin.ApiUsersFormController = Ember.ObjectController.extend(Admin.Save, {
   },
 });
 
-Admin.ApiUsersEditController = Admin.ApiUsersFormController.extend();
-Admin.ApiUsersNewController = Admin.ApiUsersFormController.extend();
+export default ApiUsersFormController;

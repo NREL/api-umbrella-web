@@ -1,10 +1,15 @@
-Admin.AdminGroupsFormController = Ember.ObjectController.extend(Admin.Save, {
+import Ember from 'ember';
+import Save from '/api-umbrella-admin/save';
+import ApiScope from '/api-umbrella-admin/models/api-scope';
+import AdminPermission from '/api-umbrella-admin/models/admin-permission';
+
+var AdminGroupsFormController = Ember.ObjectController.extend(Save, {
   apiScopeOptions: function() {
-    return Admin.ApiScope.find();
+    return ApiScope.find();
   }.property(),
 
   permissionOptions: function() {
-    return Admin.AdminPermission.find();
+    return AdminPermission.find();
   }.property(),
 
   actions: {
@@ -17,5 +22,4 @@ Admin.AdminGroupsFormController = Ember.ObjectController.extend(Admin.Save, {
   },
 });
 
-Admin.AdminGroupsEditController = Admin.AdminGroupsFormController.extend();
-Admin.AdminGroupsNewController = Admin.AdminGroupsFormController.extend();
+export default AdminGroupsFormController;

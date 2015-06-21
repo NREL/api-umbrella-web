@@ -1,4 +1,6 @@
-Admin.WebsiteBackendsBaseRoute = Ember.Route.extend({
+import Ember from 'ember';
+
+var WebsiteBackendsBaseRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('model', model);
 
@@ -6,3 +8,5 @@ Admin.WebsiteBackendsBaseRoute = Ember.Route.extend({
     $('ul.nav li.nav-config').addClass('active');
   },
 });
+
+export default WebsiteBackendsBaseRoute;

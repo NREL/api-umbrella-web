@@ -1,4 +1,6 @@
-Admin.StatsMapTableView = Ember.View.extend({
+import Ember from 'ember';
+
+var StatsMapTableView = Ember.View.extend({
   tagName: 'table',
 
   classNames: ['table', 'table-striped', 'table-bordered', 'table-condensed'],
@@ -54,3 +56,5 @@ Admin.StatsMapTableView = Ember.View.extend({
     table.rows.add(this.get('model.regions')).draw();
   }.observes('model.regions'),
 });
+
+export default StatsMapTableView;

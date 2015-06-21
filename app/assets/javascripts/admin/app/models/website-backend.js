@@ -1,4 +1,7 @@
-Admin.WebsiteBackend = Ember.Model.extend(Ember.Validations.Mixin, {
+import Ember from 'ember';
+import APIUmbrellaRESTAdapter from '/api-umbrella-admin/adapters/apiumbrella';
+
+var WebsiteBackend = Ember.Model.extend(Ember.Validations.Mixin, {
   id: Ember.attr(),
   frontendHost: Ember.attr(),
   backendProtocol: Ember.attr(),
@@ -29,10 +32,11 @@ Admin.WebsiteBackend = Ember.Model.extend(Ember.Validations.Mixin, {
     },
   },
 });
+WebsiteBackend.url = '/api-umbrella/v1/website_backends';
+WebsiteBackend.rootKey = 'website_backend';
+WebsiteBackend.collectionKey = 'data';
+WebsiteBackend.primaryKey = 'id';
+WebsiteBackend.camelizeKeys = true;
+WebsiteBackend.adapter = APIUmbrellaRESTAdapter.create();
 
-Admin.WebsiteBackend.url = '/api-umbrella/v1/website_backends';
-Admin.WebsiteBackend.rootKey = 'website_backend';
-Admin.WebsiteBackend.collectionKey = 'data';
-Admin.WebsiteBackend.primaryKey = 'id';
-Admin.WebsiteBackend.camelizeKeys = true;
-Admin.WebsiteBackend.adapter = Admin.APIUmbrellaRESTAdapter.create();
+export default WebsiteBackend;

@@ -1,4 +1,6 @@
-Admin.ApisSubSettingsFormController = Admin.NestedFormController.extend({
+import NestedFormController from '/api-umbrella-admin/controllers/nested-form';
+
+var ApisSubSettingsFormController = NestedFormController.extend({
   titleBase: 'Sub-URL Request Settings',
 
   httpMethodOptions: [
@@ -14,3 +16,5 @@ Admin.ApisSubSettingsFormController = Admin.NestedFormController.extend({
     { id: 'PATCH', name: 'PATCH' },
   ],
 });
+
+export default ApisSubSettingsFormController;

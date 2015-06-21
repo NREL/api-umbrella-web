@@ -1,4 +1,6 @@
-Admin.ApisRewriteFormController = Admin.NestedFormController.extend({
+import NestedFormController from '/api-umbrella-admin/controllers/nested-form';
+
+var ApisRewriteFormController = NestedFormController.extend({
   titleBase: 'Rewrite',
 
   matcherTypeOptions: [
@@ -19,3 +21,5 @@ Admin.ApisRewriteFormController = Admin.NestedFormController.extend({
     { id: 'PATCH', name: 'PATCH' },
   ],
 });
+
+export default ApisRewriteFormController;

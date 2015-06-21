@@ -1,4 +1,7 @@
-Admin.WebsiteBackendsFormController = Ember.ObjectController.extend(Admin.Save, {
+import Ember from 'ember';
+import Save from '/api-umbrella-admin/save';
+
+var WebsiteBackendsFormController = Ember.ObjectController.extend(Save, {
   backendProtocolOptions: [
     { id: 'http', name: 'http' },
     { id: 'https', name: 'https' },
@@ -37,5 +40,4 @@ Admin.WebsiteBackendsFormController = Ember.ObjectController.extend(Admin.Save, 
   },
 });
 
-Admin.WebsiteBackendsEditController = Admin.WebsiteBackendsFormController.extend();
-Admin.WebsiteBackendsNewController = Admin.WebsiteBackendsFormController.extend();
+export default WebsiteBackendsFormController;

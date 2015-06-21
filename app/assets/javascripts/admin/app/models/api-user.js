@@ -1,4 +1,9 @@
-Admin.ApiUser = Ember.Model.extend(Ember.Validations.Mixin, {
+import Ember from 'ember';
+import ApiSettings from '/api-umbrella-admin/models/api-settings';
+import ApiUserRole from '/api-umbrella-admin/models/api-user-role';
+import APIUmbrellaRESTAdapter from '/api-umbrella-admin/adapters/apiumbrella';
+
+var ApiUser = Ember.Model.extend(Ember.Validations.Mixin, {
   id: Ember.attr(),
   apiKey: Ember.attr(),
   apiKeyHidesAt: Ember.attr(),
@@ -24,7 +29,7 @@ Admin.ApiUser = Ember.Model.extend(Ember.Validations.Mixin, {
   registrationReferer: Ember.attr(),
   registrationOrigin: Ember.attr(),
 
-  settings: Ember.belongsTo('Admin.ApiSettings', { key: 'settings', embedded: true }),
+  settings: Ember.belongsTo('ApiSettings', { key: 'settings', embedded: true }),
 
   validations: {
     firstName: {
@@ -58,7 +63,7 @@ Admin.ApiUser = Ember.Model.extend(Ember.Validations.Mixin, {
     }
 
     if(!this.get('settings')) {
-      this.set('settings', Admin.ApiSettings.create());
+      this.set('settings', ApiSettings.create());
     }
 
     if(!this.get('registrationSource') && this.get('isNew')) {
@@ -85,13 +90,14 @@ Admin.ApiUser = Ember.Model.extend(Ember.Validations.Mixin, {
   didSaveRecord: function() {
     // Clear the cached roles on save, so the list of available roles is always
     // correct for subsequent form renderings in this current session.
-    Admin.ApiUserRole.clearCache();
+    ApiUserRole.clearCache();
   },
 });
+ApiUser.url = '/api-umbrella/v1/users';
+ApiUser.rootKey = 'user';
+ApiUser.collectionKey = 'data';
+ApiUser.primaryKey = 'id';
+ApiUser.camelizeKeys = true;
+ApiUser.adapter = APIUmbrellaRESTAdapter.create();
 
-Admin.ApiUser.url = '/api-umbrella/v1/users';
-Admin.ApiUser.rootKey = 'user';
-Admin.ApiUser.collectionKey = 'data';
-Admin.ApiUser.primaryKey = 'id';
-Admin.ApiUser.camelizeKeys = true;
-Admin.ApiUser.adapter = Admin.APIUmbrellaRESTAdapter.create();
+export default ApiUser;

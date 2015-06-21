@@ -1,4 +1,6 @@
-Admin.ApiScopesBaseRoute = Ember.Route.extend({
+import Ember from 'ember';
+
+var ApiScopesBaseRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('model', model);
 
@@ -6,3 +8,5 @@ Admin.ApiScopesBaseRoute = Ember.Route.extend({
     $('ul.nav li.nav-users').addClass('active');
   },
 });
+
+export default ApiScopesBaseRoute;

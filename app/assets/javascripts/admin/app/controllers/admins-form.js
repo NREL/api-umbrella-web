@@ -1,6 +1,10 @@
-Admin.AdminsFormController = Ember.ObjectController.extend(Admin.Save, {
+import Ember from 'ember';
+import Save from '/api-umbrella-admin/save';
+import AdminGroup from '/api-umbrella-admin/models/admin-group';
+
+var AdminsFormController = Ember.ObjectController.extend(Save, {
   groupOptions: function() {
-    return Admin.AdminGroup.find();
+    return AdminGroup.find();
   }.property(),
 
   currentAdmin: function() {
@@ -17,5 +21,4 @@ Admin.AdminsFormController = Ember.ObjectController.extend(Admin.Save, {
   },
 });
 
-Admin.AdminsEditController = Admin.AdminsFormController.extend();
-Admin.AdminsNewController = Admin.AdminsFormController.extend();
+export default AdminsFormController;

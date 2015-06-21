@@ -1,4 +1,6 @@
-Admin.CheckboxListItemView = Ember.Checkbox.extend({
+import Ember from 'ember';
+
+var CheckboxListItemView = Ember.Checkbox.extend({
   checked: function() {
     var checkedValues = this.get('checkedValues') || [];
     var value = this.get('content.id');
@@ -20,10 +22,4 @@ Admin.CheckboxListItemView = Ember.Checkbox.extend({
   }
 });
 
-Admin.CheckboxListView = Ember.CollectionView.extend({
-  itemViewClass: Ember.View.extend({
-    checkedValuesBinding: 'parentView.checkedValues',
-
-    template: Ember.Handlebars.compile('<label class="checkbox">{{view Admin.CheckboxListItemView checkedValuesBinding=\'view.checkedValues\' contentBinding=\'view.content\'}} {{view.content.name}}</label>')
-  }),
-});
+export default CheckboxListItemView;

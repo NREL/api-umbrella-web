@@ -1,4 +1,7 @@
-Admin.LogsTableView = Ember.View.extend({
+import Ember from 'ember';
+import DataTablesHelpers from '/api-umbrella-admin/data-tables-helpers';
+
+var LogsTableView = Ember.View.extend({
   tagName: 'table',
 
   classNames: ['table', 'table-striped', 'table-bordered', 'table-condensed'],
@@ -46,25 +49,25 @@ Admin.LogsTableView = Ember.View.extend({
           type: 'date',
           title: 'Time',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderTime,
+          render: DataTablesHelpers.renderTime,
         },
         {
           data: 'request_method',
           title: 'Method',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'request_host',
           title: 'Host',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'request_url',
           title: 'URL',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'user_email',
@@ -86,37 +89,37 @@ Admin.LogsTableView = Ember.View.extend({
           data: 'request_ip',
           title: 'IP Address',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'request_ip_country',
           title: 'Country',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'request_ip_region',
           title: 'State',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'request_ip_city',
           title: 'City',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'response_status',
           title: 'Status',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'gatekeeper_denied_code',
           title: 'Reason Denied',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'response_time',
@@ -134,19 +137,19 @@ Admin.LogsTableView = Ember.View.extend({
           data: 'response_content_type',
           title: 'Content Type',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'request_accept_encoding',
           title: 'Accept Encoding',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'request_user_agent',
           title: 'User Agent',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
       ]
     });
@@ -156,3 +159,5 @@ Admin.LogsTableView = Ember.View.extend({
     this.$().DataTable().draw();
   }.observes('controller.query.params.query', 'controller.query.params.search', 'controller.query.params.start_at', 'controller.query.params.end_at'),
 });
+
+export default LogsTableView;

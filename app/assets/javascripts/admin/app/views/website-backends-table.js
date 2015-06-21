@@ -1,4 +1,6 @@
-Admin.WebsiteBackendsTableView = Ember.View.extend({
+import Ember from 'ember';
+
+var WebsiteBackendsTableView = Ember.View.extend({
   tagName: 'table',
   classNames: ['table', 'table-striped', 'table-bordered', 'table-condensed'],
 
@@ -29,3 +31,5 @@ Admin.WebsiteBackendsTableView = Ember.View.extend({
     }));
   },
 });
+
+export default WebsiteBackendsTableView;

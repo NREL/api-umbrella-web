@@ -1,4 +1,6 @@
-Admin.ApisUrlMatchFormController = Admin.NestedFormController.extend({
+import NestedFormController from '/api-umbrella-admin/controllers/nested-form';
+
+var ApisUrlMatchFormController = NestedFormController.extend({
   titleBase: 'Matching URL Prefix',
   exampleSuffix: 'example.json?param=value',
 
@@ -14,3 +16,5 @@ Admin.ApisUrlMatchFormController = Admin.NestedFormController.extend({
     return root + prefix + this.get('exampleSuffix');
   }.property('backendPrefix', 'frontendPrefix'),
 });
+
+export default ApisUrlMatchFormController;

@@ -1,4 +1,7 @@
-Admin.StatsUsersTableView = Ember.View.extend({
+import Ember from 'ember';
+import DataTablesHelpers from '/api-umbrella-admin/data-tables-helpers';
+
+var StatsUsersTableView = Ember.View.extend({
   tagName: 'table',
 
   classNames: ['table', 'table-striped', 'table-bordered', 'table-condensed'],
@@ -36,20 +39,20 @@ Admin.StatsUsersTableView = Ember.View.extend({
           data: 'first_name',
           title: 'First Name',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'last_name',
           title: 'Last Name',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'created_at',
           type: 'date',
           title: 'Signed Up',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderTime,
+          render: DataTablesHelpers.renderTime,
         },
         {
           data: 'hits',
@@ -68,13 +71,13 @@ Admin.StatsUsersTableView = Ember.View.extend({
           type: 'date',
           title: 'Last Request',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderTime,
+          render: DataTablesHelpers.renderTime,
         },
         {
           data: 'use_description',
           title: 'Use Description',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
       ]
     });
@@ -84,3 +87,5 @@ Admin.StatsUsersTableView = Ember.View.extend({
     this.$().DataTable().draw();
   }.observes('controller.query.params.query', 'controller.query.params.search', 'controller.query.params.start_at', 'controller.query.params.end_at'),
 });
+
+export default StatsUsersTableView;

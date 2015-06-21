@@ -1,4 +1,6 @@
-Admin.StatsQueryFormView = Ember.View.extend({
+import Ember from 'ember';
+
+var StatsQueryFormView = Ember.View.extend({
   templateName: 'stats/_query_form',
 
   enableInterval: false,
@@ -307,3 +309,5 @@ Admin.StatsQueryFormView = Ember.View.extend({
     },
   },
 });
+
+export default StatsQueryFormView;

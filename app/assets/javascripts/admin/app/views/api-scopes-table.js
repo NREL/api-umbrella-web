@@ -1,4 +1,7 @@
-Admin.ApiScopesTableView = Ember.View.extend({
+import Ember from 'ember';
+import DataTablesHelpers from '/api-umbrella-admin/data-tables-helpers';
+
+var ApiScopesTableView = Ember.View.extend({
   tagName: 'table',
 
   classNames: ['table', 'table-striped', 'table-bordered', 'table-condensed'],
@@ -27,15 +30,17 @@ Admin.ApiScopesTableView = Ember.View.extend({
           data: 'host',
           title: 'Host',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'path_prefix',
           title: 'Path Prefix',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         }
       ]
     });
   },
 });
+
+export default ApiScopesTableView;

@@ -1,4 +1,4 @@
-Admin.Router.map(function() {
+Router.map(function() {
   this.resource('apis', { path: '/apis' }, function() {
     this.route('new');
     this.route('edit', { path: '/:apiId/edit' });
@@ -47,3 +47,5 @@ Admin.Router.map(function() {
     this.route('edit', { path: '/:websiteBackendId/edit' });
   });
 });
+
+export default undefined;

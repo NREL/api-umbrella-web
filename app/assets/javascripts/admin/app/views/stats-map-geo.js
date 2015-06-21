@@ -1,4 +1,6 @@
-Admin.StatsMapGeoView = Ember.View.extend({
+import Ember from 'ember';
+
+var StatsMapGeoView = Ember.View.extend({
   data: [],
 
   chartOptions: {
@@ -79,3 +81,5 @@ Admin.StatsMapGeoView = Ember.View.extend({
     this.chart.draw(this.dataTable, this.chartOptions);
   },
 });
+
+export default StatsMapGeoView;

@@ -1,10 +1,14 @@
-Admin.WebsiteBackendsEditRoute = Admin.WebsiteBackendsBaseRoute.extend({
+import WebsiteBackendsBaseRoute from '/api-umbrella-admin/routes/website-backends-base';
+import WebsiteBackend from '/api-umbrella-admin/models/website-backend';
+
+var WebsiteBackendsEditRoute = WebsiteBackendsBaseRoute.extend({
   model: function(params) {
     // Clear the record cache, so this is always fetched from the server (to
     // account for two users simultaneously editing the same record).
-    Admin.WebsiteBackend.clearCache();
+    WebsiteBackend.clearCache();
 
-    return Admin.WebsiteBackend.find(params.websiteBackendId);
+    return WebsiteBackend.find(params.websiteBackendId);
   },
 });
 
+export default WebsiteBackendsEditRoute;

@@ -1,6 +1,10 @@
-Admin.ApiScopesNewRoute = Admin.ApiScopesBaseRoute.extend({
+import ApiScopesBaseRoute from '/api-umbrella-admin/routes/api-scopes-base';
+import ApiScope from '/api-umbrella-admin/models/api-scope';
+
+var ApiScopesNewRoute = ApiScopesBaseRoute.extend({
   model: function() {
-    return Admin.ApiScope.create();
+    return ApiScope.create();
   },
 });
 
+export default ApiScopesNewRoute;

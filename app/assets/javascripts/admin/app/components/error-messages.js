@@ -1,4 +1,6 @@
-Admin.ErrorMessagesComponent = Ember.Component.extend({
+import Ember from 'ember';
+
+var ErrorMessagesComponent = Ember.Component.extend({
   messages: function() {
     var messages = [];
 
@@ -46,3 +48,5 @@ Admin.ErrorMessagesComponent = Ember.Component.extend({
     return messages;
   }.property('model.clientErrors', 'model.serverErrors'),
 });
+
+export default ErrorMessagesComponent;

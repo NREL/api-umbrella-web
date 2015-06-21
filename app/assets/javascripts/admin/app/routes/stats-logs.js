@@ -1,4 +1,7 @@
-Admin.StatsLogsRoute = Admin.StatsBaseRoute.extend({
+import StatsBaseRoute from '/api-umbrella-admin/routes/stats-base';
+import StatsLogs from '/api-umbrella-admin/models/stats-logs';
+
+var StatsLogsRoute = StatsBaseRoute.extend({
   init: function() {
     _.defaults(this.defaultQueryParams, {
       interval: 'day',
@@ -8,7 +11,7 @@ Admin.StatsLogsRoute = Admin.StatsBaseRoute.extend({
   model: function(params) {
     this._super(params);
     if(this.validateOptions()) {
-      return Admin.StatsLogs.find(this.get('query.params'));
+      return StatsLogs.find(this.get('query.params'));
     } else {
       return {};
     }
@@ -55,8 +58,4 @@ Admin.StatsLogsRoute = Admin.StatsBaseRoute.extend({
   },
 });
 
-Admin.StatsLogsDefaultRoute = Admin.StatsLogsRoute.extend({
-  renderTemplate: function() {
-    this.render('stats/logs', { controller: 'statsLogsDefault' });
-  }
-});
+export default StatsLogsRoute;

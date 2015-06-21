@@ -1,4 +1,6 @@
-Admin.ApiSettings = Ember.Model.extend({
+import Ember from 'ember';
+
+var ApiSettings = Ember.Model.extend({
   id: Ember.attr(),
   appendQueryString: Ember.attr(),
   headersString: Ember.attr(),
@@ -20,7 +22,7 @@ Admin.ApiSettings = Ember.Model.extend({
   errorTemplates: Ember.attr(),
   errorDataYamlStrings: Ember.attr(),
 
-  rateLimits: Ember.hasMany('Admin.ApiRateLimit', { key: 'rate_limits', embedded: true }),
+  rateLimits: Ember.hasMany('ApiRateLimit', { key: 'rate_limits', embedded: true }),
 
   init: function() {
     this._super();
@@ -103,6 +105,7 @@ Admin.ApiSettings = Ember.Model.extend({
     return (this.get('rateLimitMode') === 'custom');
   }.property('rateLimitMode'),
 });
+ApiSettings.primaryKey = 'id';
+ApiSettings.camelizeKeys = true;
 
-Admin.ApiSettings.primaryKey = 'id';
-Admin.ApiSettings.camelizeKeys = true;
+export default ApiSettings;

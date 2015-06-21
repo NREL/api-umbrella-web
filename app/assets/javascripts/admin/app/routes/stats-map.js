@@ -1,4 +1,7 @@
-Admin.StatsMapRoute = Admin.StatsBaseRoute.extend({
+import StatsBaseRoute from '/api-umbrella-admin/routes/stats-base';
+import StatsMap from '/api-umbrella-admin/models/stats-map';
+
+var StatsMapRoute = StatsBaseRoute.extend({
   init: function() {
     _.defaults(this.defaultQueryParams, {
       region: 'world',
@@ -7,7 +10,7 @@ Admin.StatsMapRoute = Admin.StatsBaseRoute.extend({
 
   model: function(params) {
     this._super(params);
-    return Admin.StatsMap.find(this.get('query.params'));
+    return StatsMap.find(this.get('query.params'));
   },
 
   queryChange: function() {
@@ -21,8 +24,4 @@ Admin.StatsMapRoute = Admin.StatsBaseRoute.extend({
   }.observes('query.params.query', 'query.params.search', 'query.params.start_at', 'query.params.end_at', 'query.params.region'),
 });
 
-Admin.StatsMapDefaultRoute = Admin.StatsMapRoute.extend({
-  renderTemplate: function() {
-    this.render('stats/map', { controller: 'statsMapDefault' });
-  }
-});
+export default StatsMapRoute;

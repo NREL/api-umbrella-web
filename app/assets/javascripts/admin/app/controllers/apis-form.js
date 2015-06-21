@@ -1,4 +1,7 @@
-Admin.ApisFormController = Ember.ObjectController.extend(Admin.Save, {
+import Ember from 'ember';
+import Save from '/api-umbrella-admin/save';
+
+var ApisFormController = Ember.ObjectController.extend(Save, {
   needs: [
     'apis_server_form',
     'apis_url_match_form',
@@ -120,5 +123,4 @@ Admin.ApisFormController = Ember.ObjectController.extend(Admin.Save, {
   },
 });
 
-Admin.ApisEditController = Admin.ApisFormController.extend();
-Admin.ApisNewController = Admin.ApisFormController.extend();
+export default ApisFormController;

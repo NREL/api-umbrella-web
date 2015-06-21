@@ -1,1 +1,5 @@
-Admin.LoadingRoute = Ember.Route.extend({});
+import Ember from 'ember';
+
+var LoadingRoute = Ember.Route.extend({});
+
+export default LoadingRoute;

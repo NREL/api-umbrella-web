@@ -1,4 +1,7 @@
-Admin.AdminsTableView = Ember.View.extend({
+import Ember from 'ember';
+import DataTablesHelpers from '/api-umbrella-admin/data-tables-helpers';
+
+var AdminsTableView = Ember.View.extend({
   tagName: 'table',
 
   classNames: ['table', 'table-striped', 'table-bordered', 'table-condensed'],
@@ -29,20 +32,20 @@ Admin.AdminsTableView = Ember.View.extend({
           name: 'E-mail',
           title: 'E-mail',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'name',
           name: 'Name',
           title: 'Name',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderEscaped,
+          render: DataTablesHelpers.renderEscaped,
         },
         {
           data: 'group_names',
           name: 'Groups',
           title: 'Groups',
-          render: Admin.DataTablesHelpers.renderListEscaped,
+          render: DataTablesHelpers.renderListEscaped,
         },
         {
           data: 'last_sign_in_at',
@@ -50,7 +53,7 @@ Admin.AdminsTableView = Ember.View.extend({
           name: 'Last Signed In',
           title: 'Last Signed In',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderTime,
+          render: DataTablesHelpers.renderTime,
         },
         {
           data: 'created_at',
@@ -58,7 +61,7 @@ Admin.AdminsTableView = Ember.View.extend({
           name: 'Created',
           title: 'Created',
           defaultContent: '-',
-          render: Admin.DataTablesHelpers.renderTime,
+          render: DataTablesHelpers.renderTime,
         }
       ]
     });
@@ -67,3 +70,5 @@ Admin.AdminsTableView = Ember.View.extend({
     }.bind(this));
   },
 });
+
+export default AdminsTableView;

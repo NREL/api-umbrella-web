@@ -1,4 +1,6 @@
-Admin.StatsDrilldownController = Admin.StatsBaseController.extend({
+import StatsBaseController from '/api-umbrella-admin/controllers/stats-base';
+
+var StatsDrilldownController = StatsBaseController.extend({
   breadcrumbs: function() {
     var crumbs = [];
 
@@ -27,8 +29,4 @@ Admin.StatsDrilldownController = Admin.StatsBaseController.extend({
   }.property('query.params', 'query.params.query', 'query.params.search', 'query.params.start_at', 'query.params.end_at', 'query.params.prefix'),
 });
 
-Admin.StatsDrilldownDefaultController = Admin.StatsDrilldownController.extend({
-  renderTemplate: function() {
-    this.render('stats/drilldown');
-  }
-});
+export default StatsDrilldownController;

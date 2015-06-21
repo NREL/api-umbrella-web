@@ -1,4 +1,6 @@
-Admin.StatsUsersRoute = Admin.StatsBaseRoute.extend({
+import StatsBaseRoute from '/api-umbrella-admin/routes/stats-base';
+
+var StatsUsersRoute = StatsBaseRoute.extend({
   model: function(params) {
     this._super(params);
     return {};
@@ -15,8 +17,4 @@ Admin.StatsUsersRoute = Admin.StatsBaseRoute.extend({
   }.observes('query.params.query', 'query.params.search', 'query.params.start_at', 'query.params.end_at'),
 });
 
-Admin.StatsUsersDefaultRoute = Admin.StatsUsersRoute.extend({
-  renderTemplate: function() {
-    this.render('stats/users', { controller: 'statsUsersDefault' });
-  }
-});
+export default StatsUsersRoute;

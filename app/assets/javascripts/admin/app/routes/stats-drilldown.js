@@ -1,4 +1,7 @@
-Admin.StatsDrilldownRoute = Admin.StatsBaseRoute.extend({
+import StatsBaseRoute from '/api-umbrella-admin/routes/stats-base';
+import StatsDrilldown from '/api-umbrella-admin/models/stats-drilldown';
+
+var StatsDrilldownRoute = StatsBaseRoute.extend({
   init: function() {
     _.defaults(this.defaultQueryParams, {
       interval: 'day',
@@ -9,7 +12,7 @@ Admin.StatsDrilldownRoute = Admin.StatsBaseRoute.extend({
   model: function(params) {
     this._super(params);
     if(this.validateOptions()) {
-      return Admin.StatsDrilldown.find(this.get('query.params'));
+      return StatsDrilldown.find(this.get('query.params'));
     } else {
       return {};
     }
@@ -56,8 +59,4 @@ Admin.StatsDrilldownRoute = Admin.StatsBaseRoute.extend({
   },
 });
 
-Admin.StatsDrilldownDefaultRoute = Admin.StatsDrilldownRoute.extend({
-  renderTemplate: function() {
-    this.render('stats/drilldown', { controller: 'statsDrilldownDefault' });
-  }
-});
+export default StatsDrilldownRoute;

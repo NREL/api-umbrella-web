@@ -1,4 +1,9 @@
-Admin.Api = Ember.Model.extend(Ember.Validations.Mixin, {
+import Ember from 'ember';
+import ApiSettings from '/api-umbrella-admin/models/api-settings';
+import ApiUserRole from '/api-umbrella-admin/models/api-user-role';
+import APIUmbrellaRESTAdapter from '/api-umbrella-admin/adapters/apiumbrella';
+
+var Api = Ember.Model.extend(Ember.Validations.Mixin, {
   name: Ember.attr(),
   sortOrder: Ember.attr(Number),
   backendProtocol: Ember.attr(),
@@ -10,11 +15,11 @@ Admin.Api = Ember.Model.extend(Ember.Validations.Mixin, {
   creator: Ember.attr(),
   updater: Ember.attr(),
 
-  servers: Ember.hasMany('Admin.ApiServer', { key: 'servers', embedded: true }),
-  urlMatches: Ember.hasMany('Admin.ApiUrlMatch', { key: 'url_matches', embedded: true }),
-  settings: Ember.belongsTo('Admin.ApiSettings', { key: 'settings', embedded: true }),
-  subSettings: Ember.hasMany('Admin.ApiSubSettings', { key: 'sub_settings', embedded: true }),
-  rewrites: Ember.hasMany('Admin.ApiRewrite', { key: 'rewrites', embedded: true }),
+  servers: Ember.hasMany('ApiServer', { key: 'servers', embedded: true }),
+  urlMatches: Ember.hasMany('ApiUrlMatch', { key: 'url_matches', embedded: true }),
+  settings: Ember.belongsTo('ApiSettings', { key: 'settings', embedded: true }),
+  subSettings: Ember.hasMany('ApiSubSettings', { key: 'sub_settings', embedded: true }),
+  rewrites: Ember.hasMany('ApiRewrite', { key: 'rewrites', embedded: true }),
 
   validations: {
     name: {
@@ -55,7 +60,7 @@ Admin.Api = Ember.Model.extend(Ember.Validations.Mixin, {
 
   setDefaults: function() {
     if(!this.get('settings')) {
-      this.set('settings', Admin.ApiSettings.create());
+      this.set('settings', ApiSettings.create());
     }
   },
 
@@ -70,13 +75,14 @@ Admin.Api = Ember.Model.extend(Ember.Validations.Mixin, {
   didSaveRecord: function() {
     // Clear the cached roles on save, so the list of available roles is always
     // correct for subsequent form renderings in this current session.
-    Admin.ApiUserRole.clearCache();
+    ApiUserRole.clearCache();
   },
 });
+Api.url = '/api-umbrella/v1/apis';
+Api.rootKey = 'api';
+Api.collectionKey = 'data';
+Api.primaryKey = 'id';
+Api.camelizeKeys = true;
+Api.adapter = APIUmbrellaRESTAdapter.create();
 
-Admin.Api.url = '/api-umbrella/v1/apis';
-Admin.Api.rootKey = 'api';
-Admin.Api.collectionKey = 'data';
-Admin.Api.primaryKey = 'id';
-Admin.Api.camelizeKeys = true;
-Admin.Api.adapter = Admin.APIUmbrellaRESTAdapter.create();
+export default Api;

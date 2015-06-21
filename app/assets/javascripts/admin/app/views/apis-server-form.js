@@ -1,4 +1,6 @@
-Admin.ApisServerFormView = Ember.View.extend({
+import Ember from 'ember';
+
+var ApisServerFormView = Ember.View.extend({
   templateName: 'apis/server_form',
 
   didInsertElement: function() {
@@ -8,3 +10,5 @@ Admin.ApisServerFormView = Ember.View.extend({
     }
   }
 });
+
+export default ApisServerFormView;
