@@ -26,6 +26,16 @@
     <h4>Example:</h4>
     <div><strong>Incoming Frontend Request:</strong> {{exampleIncomingUrl}}</div>
     <div><strong>Outgoing Backend Request:</strong> {{exampleOutgoingUrl}}</div>
+
+    <h4>Custom Rate Limit Bucket:</h4>
+    <div class="row-fluid">
+      <p class="fieldset-note">
+        Rate limits are typically applied per frontend domain. You can modify this behavior by designating a "bucket" with which to count requests to this URL.
+      </p>
+      {{input rateLimitBucketName
+        label="Bucket name"
+        inputConfig='class:span12'}}
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn" {{action 'cancel'}}>Cancel</button>
