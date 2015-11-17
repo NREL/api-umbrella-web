@@ -10,11 +10,16 @@ machine:
 dependencies:
   cache_directories:
     - ci_cache
+    - mongodb-linux-x86_64-2.6.11
   post:
     - mkdir -p ci_cache
     - find ci_cache -maxdepth 1 -name 'elasticsearch*' -not -name 'elasticsearch-1.5.1' -exec rm -rf {} \;
     - if [[ ! -e ci_cache/elasticsearch-1.5.1 ]]; then cd ci_cache; wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.5.1.tar.gz && tar -xvf elasticsearch-1.5.1.tar.gz; rm elasticsearch-1.5.1.tar.gz; fi
     - ci_cache/elasticsearch-1.5.1/bin/elasticsearch: {background: true}
+    - if [[ ! -d mongodb-linux-x86_64-2.6.11 ]]; then wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.6.11.tgz && tar xvzf mongodb-linux-x86_64-2.6.11.tgz; fi
+    - sudo stop mongodb
+    - sudo cp mongodb-linux-x86_64-2.6.11/bin/* /usr/bin/
+    - sudo start mongodb
 test:
   override:
     - bundle exec rake
