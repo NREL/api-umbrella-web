@@ -4,6 +4,7 @@
       <tr>
         <th>Frontend Prefix</th>
         <th>Backend Prefix</th>
+        <th>Custom Rate Limit Bucket</th>
         <th></th>
         <th class="reorder-handle"></th>
       </tr>
@@ -14,6 +15,7 @@
           <tr data-id="{{unbound id}}">
             <td>{{frontendPrefix}}</td>
             <td>{{backendPrefixWithDefault}}</td>
+            <td>{{rateLimitBucketName}}</td>
             <td class="table-row-actions" style="width: 90px; white-space: nowrap;">
               <a href="#" {{action 'editUrlMatch' this}}><i class="fa fa-pencil"></i>{{t 'admin.edit'}}</a>
               <a href="#" class="remove-action" {{action 'deleteUrlMatch' this}}><i class="fa fa-times"></i>{{t 'admin.remove'}}</a>

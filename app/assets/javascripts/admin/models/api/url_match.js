@@ -3,6 +3,7 @@ Admin.ApiUrlMatch = Ember.Model.extend(Ember.Validations.Mixin,{
   sortOrder: Ember.attr(Number),
   frontendPrefix: Ember.attr(),
   backendPrefix: Ember.attr(),
+  rateLimitBucketName: Ember.attr(),
 
   validations: {
     frontendPrefix: {
@@ -18,6 +19,9 @@ Admin.ApiUrlMatch = Ember.Model.extend(Ember.Validations.Mixin,{
         with: CommonValidations.url_prefix_format,
         message: polyglot.t('errors.messages.invalid_url_prefix_format'),
       },
+    },
+    rateLimitBucketName: {
+      length: { maximum: 30 }
     },
   },
 

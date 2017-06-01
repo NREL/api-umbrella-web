@@ -74,6 +74,7 @@ describe Api::V1::ConfigController do
           "url_matches",
           "- backend_prefix",
           "  frontend_prefix",
+          "  rate_limit_bucket_name",
         ])
       end
     end

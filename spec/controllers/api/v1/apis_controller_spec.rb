@@ -1317,6 +1317,24 @@ describe Api::V1::ApisController do
       end
     end
 
+    it "does not update rate limit bucket field when empty" do
+      admin_token_auth(@admin)
+      attributes = @api.serializable_hash
+      attributes["url_matches"][0]["rate_limit_bucket_name"] = ""
+      put :update, :format => "json", :id => @api.id, :api => attributes
+      @api.reload
+      expect(@api.url_matches[0].rate_limit_bucket_name).to be_nil
+    end
+
+    it "updates rate limit bucket field when non-empty" do
+      admin_token_auth(@admin)
+      attributes = @api.serializable_hash
+      attributes["url_matches"][0]["rate_limit_bucket_name"] = "bouquet" 
+      put :update, :format => "json", :id => @api.id, :api => attributes
+      @api.reload
+      expect(@api.url_matches[0].rate_limit_bucket_name).to eq "bouquet"
+    end
+
     describe "servers" do
       it_behaves_like "validates nested attributes presence - update", :servers
     end
